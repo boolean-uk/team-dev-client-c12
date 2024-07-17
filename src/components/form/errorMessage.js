@@ -1,0 +1,3 @@
+const ErrorMessage = ({value, onChange}) => {
+
+}

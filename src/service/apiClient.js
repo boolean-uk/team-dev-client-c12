@@ -1,3 +1,4 @@
+import { handleRegistrationError } from "../errors_handlers/errorRegisterHandler"
 import { API_URL } from "./constants"
 
 async function login(email, password) {
@@ -5,8 +6,13 @@ async function login(email, password) {
 }
 
 async function register(email, password) {
-    await post('users', { email, password }, false)
-    return await login(email, password)
+    try {
+        await post('users', { email, password }, false)
+        return await login(email, password)
+    } catch (error) {
+        return handleRegistrationError(error)
+    }
+    
 }
 
 async function createProfile(userId, firstName, lastName, githubUrl, bio) {

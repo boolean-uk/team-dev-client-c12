@@ -39,7 +39,11 @@ const Register = () => {
 							label={"Password *"}
 							type={"password"}
 						/>
+						<label>
+							your password should be atleast 8 characters,includes numbers and capital letters and also one special character
+						</label>
 					</form>
+					
 					<Button
 						text="Sign up"
 						onClick={() => onRegister(formData.email, formData.password)}
