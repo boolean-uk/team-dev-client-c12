@@ -4,14 +4,16 @@ import TextInput from "../../components/form/textInput";
 import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
 import "./login.css";
+import ErrorMessage from "../../components/form/errorMessage";
 
 const Login = () => {
 	const { onLogin } = useAuth();
 	const [formData, setFormData] = useState({ email: "", password: "" });
-
+	const [errors, setErrors] = useState('')
 	const onChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
+		setErrors('')
 	};
 
 	return (
@@ -38,10 +40,11 @@ const Login = () => {
 							label={"Password *"}
 							type={"password"}
 						/>
+						<ErrorMessage message= {errors}/>
 					</form>
 					<Button
 						text="Log in"
-						onClick={() => onLogin(formData.email, formData.password)}
+						onClick={() => onLogin(formData.email, formData.password, setErrors)}
 						classes="green width-full"
 					/>
 				</div>

@@ -2,7 +2,15 @@
 import { API_URL } from "./constants"
 
 async function login(email, password) {
-    return await post('login', { email, password }, false)
+    try {
+        const res =  await post('login', { email, password }, false)
+        if(res.status !== 'success') {
+            throw new Error(res.data.error)
+        }
+        return res
+    } catch (error) {
+        return { status: false, error : error}
+    }
 }
 
 async function register(email, password) {

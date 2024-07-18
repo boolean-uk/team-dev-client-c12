@@ -23,9 +23,20 @@ const AuthProvider = ({ children }) => {
         }
     }, [location.state?.from?.pathname, navigate])
 
-	const handleLogin = async (email, password) => {
-		const res = await login(email, password)
-
+	const handleLogin = async (email, password, setErrors) => {
+		try {
+			const validatedEmail = validationEmail(email)
+			if(validatedEmail !== true) {
+				throw new Error(validatedEmail)
+			}
+			const validatedPassword = validationPassword(password)
+			if(validatedPassword !== 'ValidPassword') {
+				throw new Error(validatedPassword)
+			}
+			const res = await login(email, password)
+			if(!res.status) {
+				throw new Error(res.error.message)
+			}
         if (!res.data.token) {
             return navigate("/login")
         }
@@ -34,6 +45,9 @@ const AuthProvider = ({ children }) => {
 
 		setToken(res.data.token)
 		navigate(location.state?.from?.pathname || "/")
+		} catch (error) {
+			setErrors(error.message)
+		}
 	};
 
 	const handleLogout = () => {
@@ -59,7 +73,6 @@ const AuthProvider = ({ children }) => {
 			navigate("/verification")
 
 		} catch (error) {
-			console.log('here')
 			setErrors(error.message)
 		}
 	}
@@ -125,8 +138,8 @@ function validationPassword(password) {
 	if(!hasUppercase) return 'Password should have at least one uppercase letter'
 	if(!hasNumber) return 'Password should have at least one number'
 	if(!hasSpecialCharacter) return 'Password should have at least one special character'
-
 	return 'ValidPassword'
 }
+
 
 export { AuthContext, AuthProvider, ProtectedRoute }
