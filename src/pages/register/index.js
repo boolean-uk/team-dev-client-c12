@@ -4,15 +4,19 @@ import TextInput from "../../components/form/textInput";
 import useAuth from "../../hooks/useAuth";
 import CredentialsCard from "../../components/credentials";
 import "./register.css";
+import ErrorMessage from "../../components/form/errorMessage";
 
 const Register = () => {
 	const { onRegister } = useAuth();
 	const [formData, setFormData] = useState({ email: "", password: "" });
-
+	const [errors, setErrors] = useState('')
+ 
 	const onChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
+		setErrors('')
 	};
+
 
 	return (
 		<div className="bg-blue register credentialpage">
@@ -39,6 +43,7 @@ const Register = () => {
 							label={"Password *"}
 							type={"password"}
 						/>
+						<ErrorMessage message= {errors}/>
 						<label>
 							your password should be atleast 8 characters,includes numbers and capital letters and also one special character
 						</label>
@@ -46,7 +51,7 @@ const Register = () => {
 					
 					<Button
 						text="Sign up"
-						onClick={() => onRegister(formData.email, formData.password)}
+						onClick={() => onRegister(formData.email, formData.password, setErrors)}
 						classes="green width-full"
 					/>
 				</div>

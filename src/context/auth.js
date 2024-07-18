@@ -41,21 +41,27 @@ const AuthProvider = ({ children }) => {
 		setToken(null)
 	};
 
-    const handleRegister = async (email, password) => {
-        const res = await register(email, password)
-		setToken(res.data.token)
+	const handleRegister = async (email, password, setErrors) => {
+		try {
+			if(password.length < 8 || email.length < 5) {
+				throw new Error('password should be more than 8 characters')
+			}
+			const res = await register(email, password, setErrors)
+			setToken(res.data.token)
+			navigate("/verification")
+		} catch (error) {
+			setErrors(error.message)
+		}
+	}
 
-        navigate("/verification")
-    }
+	const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+			const { userId } = jwt_decode(token)
 
-    const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
-        const { userId } = jwt_decode(token)
+			await createProfile(userId, firstName, lastName, githubUrl, bio)
 
-        await createProfile(userId, firstName, lastName, githubUrl, bio)
-
-        localStorage.setItem('token', token)
-        navigate('/')
-    }
+			localStorage.setItem('token', token)
+			navigate('/')
+	}
 
 	const value = {
 		token,
