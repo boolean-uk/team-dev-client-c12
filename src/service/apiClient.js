@@ -1,18 +1,26 @@
-import { handleRegistrationError } from "../errors_handlers/errorRegisterHandler"
+
 import { API_URL } from "./constants"
 
 async function login(email, password) {
     return await post('login', { email, password }, false)
 }
 
-async function register(email, password, setErrors) {
+async function register(email, password) {
     try {
-        await post('users', { email, password }, false)
+        const res = await post('users', { email, password }, false)
+        if(res.status === 'fail') {
+            throw new Error(res.data.error)
+        }
         return await login(email, password)
     } catch (error) {
-        return handleRegistrationError(error)
+        if(error === 'Email already in use') {
+            return { status : false, error : error}
+        }
+        if ( error === 'Unable to create new user') {
+            return { status : false, error : 'There was an issue creating your account. Please try again later or contact support.'}
+        }
+        return { status : false, error : error}
     }
-    
 }
 
 async function createProfile(userId, firstName, lastName, githubUrl, bio) {

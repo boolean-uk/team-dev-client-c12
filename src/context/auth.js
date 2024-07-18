@@ -52,10 +52,14 @@ const AuthProvider = ({ children }) => {
 				throw new Error(validatedPassword)
 			}
 			const res = await register(email, password, setErrors)
-			
+			if (!res.status) {
+				throw new Error(res.error.message)
+			}
 			setToken(res.data.token)
 			navigate("/verification")
+
 		} catch (error) {
+			console.log('here')
 			setErrors(error.message)
 		}
 	}
@@ -116,7 +120,8 @@ function validationPassword(password) {
 	const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password)
 
 	if(password.length < 1) return 'Password is required'
-	if(password.length < minLength) return 'Password should be at least 8 characters long'
+	if(password.length < minLength ) return 'Password should be at least 8 characters long'
+	if(password.length > 24) return 'Password should be less than 24 characters'
 	if(!hasUppercase) return 'Password should have at least one uppercase letter'
 	if(!hasNumber) return 'Password should have at least one number'
 	if(!hasSpecialCharacter) return 'Password should have at least one special character'
