@@ -5,7 +5,7 @@ async function login(email, password) {
     return await post('login', { email, password }, false)
 }
 
-async function register(email, password) {
+async function register(email, password, setErrors) {
     try {
         await post('users', { email, password }, false)
         return await login(email, password)

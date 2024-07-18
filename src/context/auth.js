@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
 
         localStorage.setItem('token', res.data.token)
 
-		setToken(res.token)
+		setToken(res.data.token)
 		navigate(location.state?.from?.pathname || "/")
 	};
 
@@ -43,10 +43,16 @@ const AuthProvider = ({ children }) => {
 
 	const handleRegister = async (email, password, setErrors) => {
 		try {
-			if(password.length < 8 || email.length < 5) {
-				throw new Error('password should be more than 8 characters')
+			const validatedEmail = validationEmail(email)
+			if(validatedEmail !== true) {
+				throw new Error(validatedEmail)
+			}
+			const validatedPassword = validationPassword(password)
+			if(validatedPassword !== 'ValidPassword') {
+				throw new Error(validatedPassword)
 			}
 			const res = await register(email, password, setErrors)
+			
 			setToken(res.data.token)
 			navigate("/verification")
 		} catch (error) {
@@ -59,7 +65,7 @@ const AuthProvider = ({ children }) => {
 
 			await createProfile(userId, firstName, lastName, githubUrl, bio)
 
-			localStorage.setItem('token', token)
+			// localStorage.setItem('token', token)
 			navigate('/')
 	}
 
@@ -88,8 +94,34 @@ const ProtectedRoute = ({ children }) => {
 			<Navigation />
             <Modal />
 			{children}
+
 		</div>
 	)
+}
+function validationEmail(email) {
+	const errorMessage = "Please enter a valid email"
+	const emptyErrorMessage = "Email is required."
+	if (!email) {
+		return emptyErrorMessage
+	}
+	const pattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+	if(!pattern.test(email)) return errorMessage
+	return true
+}
+
+function validationPassword(password) {
+	const minLength = 8
+	const hasUppercase = /[A-Z]/.test(password)
+	const hasNumber = /\d/.test(password)
+	const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password)
+
+	if(password.length < 1) return 'Password is required'
+	if(password.length < minLength) return 'Password should be at least 8 characters long'
+	if(!hasUppercase) return 'Password should have at least one uppercase letter'
+	if(!hasNumber) return 'Password should have at least one number'
+	if(!hasSpecialCharacter) return 'Password should have at least one special character'
+
+	return 'ValidPassword'
 }
 
 export { AuthContext, AuthProvider, ProtectedRoute }
