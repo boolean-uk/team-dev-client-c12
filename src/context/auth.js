@@ -24,14 +24,18 @@ const AuthProvider = ({ children }) => {
     }, [location.state?.from?.pathname, navigate])
 
 	const handleLogin = async (email, password, setErrors) => {
+
+		const passwordRequirments = 'Password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character.'
+		const emailErrorMessage = "Please enter a valid email"
+
 		try {
 			const validatedEmail = validationEmail(email)
-			if(validatedEmail !== true) {
-				throw new Error(validatedEmail)
+			if(!validatedEmail) {
+				throw new Error(emailErrorMessage)
 			}
 			const validatedPassword = validationPassword(password)
-			if(validatedPassword !== 'ValidPassword') {
-				throw new Error(validatedPassword)
+			if(!validatedPassword) {
+				throw new Error(passwordRequirments)
 			}
 			const res = await login(email, password)
 			if(!res.status) {
@@ -56,14 +60,17 @@ const AuthProvider = ({ children }) => {
 	};
 
 	const handleRegister = async (email, password, setErrors) => {
+		const passwordRequirments = 'Password must be at least 8 characters long and include at least one uppercase letter, one number, and one special character.'
+		const emailErrorMessage = "Please enter a valid email"
+
 		try {
 			const validatedEmail = validationEmail(email)
-			if(validatedEmail !== true) {
-				throw new Error(validatedEmail)
+			if(!validatedEmail) {
+				throw new Error(emailErrorMessage)
 			}
 			const validatedPassword = validationPassword(password)
-			if(validatedPassword !== 'ValidPassword') {
-				throw new Error(validatedPassword)
+			if(!validatedPassword) {
+				throw new Error(passwordRequirments)
 			}
 			const res = await register(email, password, setErrors)
 			if (!res.status) {
@@ -116,14 +123,10 @@ const ProtectedRoute = ({ children }) => {
 	)
 }
 function validationEmail(email) {
-	const errorMessage = "Please enter a valid email"
-	const emptyErrorMessage = "Email is required."
-	if (!email) {
-		return emptyErrorMessage
-	}
+	
 	const pattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
-	if(!pattern.test(email)) return errorMessage
-	return true
+	
+	return (!email || !pattern.test(email)) ? false : true
 }
 
 function validationPassword(password) {
@@ -132,13 +135,8 @@ function validationPassword(password) {
 	const hasNumber = /\d/.test(password)
 	const hasSpecialCharacter = /[!@#$%^&*(),.?":{}|<>]/.test(password)
 
-	if(password.length < 1) return 'Password is required'
-	if(password.length < minLength ) return 'Password should be at least 8 characters long'
-	if(password.length > 24) return 'Password should be less than 24 characters'
-	if(!hasUppercase) return 'Password should have at least one uppercase letter'
-	if(!hasNumber) return 'Password should have at least one number'
-	if(!hasSpecialCharacter) return 'Password should have at least one special character'
-	return 'ValidPassword'
+	return (password.length < minLength || !hasUppercase || !hasNumber || !hasSpecialCharacter) ? false : true
+
 }
 
 
