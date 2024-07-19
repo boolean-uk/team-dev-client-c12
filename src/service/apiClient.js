@@ -19,7 +19,7 @@ async function register(email, password) {
         if(res.status === 'fail') {
             throw new Error(res.data.error)
         }
-        return await login(email, password)
+        return login(email, password)
     } catch (error) {
         if(error === 'Email already in use') {
             return { status : false, error : error}
