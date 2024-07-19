@@ -1,85 +1,74 @@
-import { createContext, useEffect, useState } from "react"
-import { useNavigate, useLocation, Navigate } from "react-router-dom"
-import Header from "../components/header"
-import Modal from "../components/modal"
-import Navigation from "../components/navigation"
-import useAuth from "../hooks/useAuth"
-import { createProfile, login, register } from "../service/apiClient"
-import jwt_decode from "jwt-decode"
+import { createContext, useEffect, useState } from "react";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import Header from "../components/header";
+import Modal from "../components/modal";
+import Navigation from "../components/navigation";
+import useAuth from "../hooks/useAuth";
+import { createProfile, login, register } from "../service/apiClient";
+import jwt_decode from "jwt-decode";
 
-const AuthContext = createContext()
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const [token, setToken] = useState(null)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [token, setToken] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    const storedToken = localStorage.getItem("token")
+    const storedToken = localStorage.getItem("token");
 
     if (storedToken) {
-      setToken(storedToken)
-      navigate(location.state?.from?.pathname || "/")
+      setToken(storedToken);
+      navigate(location.state?.from?.pathname || "/");
     }
-  }, [location.state?.from?.pathname, navigate])
+  }, [location.state?.from?.pathname, navigate]);
 
   const handleLogin = async (email, password) => {
-    const res = await login(email, password)
+    const res = await login(email, password);
+
+    if (res.data.error) {
+      setError(res.data.error);
+    }
 
     if (!res.data.token) {
-      return navigate("/login")
+      return navigate("/login");
     }
 
-    localStorage.setItem("token", res.data.token)
+    localStorage.setItem("token", res.data.token);
 
-    setToken(res.token)
-    navigate(location.state?.from?.pathname || "/")
-  }
+    setToken(res.data.token);
+    navigate(location.state?.from?.pathname || "/");
+    setError("");
+  };
 
   const handleLogout = () => {
-    localStorage.removeItem("token")
-    setToken(null)
-  }
+    localStorage.removeItem("token");
+    setToken(null);
+    setError("");
+  };
 
   const handleRegister = async (email, password) => {
-    const res = await register(email, password)
-    setToken(res.data.token)
-
-    if (res.status === 'fail') {
-      return
+    const res = await register(email, password);
+    if (res.data.error) {
+      setError(res.data.error);
+    } else {
+      setToken(res.data.token);
+      navigate("/verification");
+      setError("");
     }
+  };
 
-    navigate("/verification")
-  }
+  const handleCreateProfile = async (firstName, lastName, githubUrl, bio) => {
+    const { userId } = jwt_decode(token);
 
-  const handleCreateProfile = async (
-    firstName,
-    lastName,
-    username,
-    githubUrl,
-    mobile,
-    bio
-  ) => {
-    const { userId } = jwt_decode(token)
+    localStorage.setItem("token", token);
 
-    localStorage.setItem("token", token)
+    await createProfile(userId, firstName, lastName, githubUrl, bio);
 
-    const res = await createProfile(
-      userId,
-      firstName,
-      lastName,
-      username,
-      githubUrl,
-      mobile,
-      bio
-    )
 
-    if (res.status === "fail") {
-      return
-    }
-
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   const value = {
     token,
@@ -87,17 +76,19 @@ const AuthProvider = ({ children }) => {
     onLogout: handleLogout,
     onRegister: handleRegister,
     onCreateProfile: handleCreateProfile,
-  }
+    error: error,
+    setError: setError,
+  };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-}
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
 
 const ProtectedRoute = ({ children }) => {
-  const { token } = useAuth()
-  const location = useLocation()
+  const { token } = useAuth();
+  const location = useLocation();
 
   if (!token) {
-    return <Navigate to={"/login"} replace state={{ from: location }} />
+    return <Navigate to={"/login"} replace state={{ from: location }} />;
   }
 
   return (
@@ -107,7 +98,7 @@ const ProtectedRoute = ({ children }) => {
       <Modal />
       {children}
     </div>
-  )
-}
+  );
+};
 
-export { AuthContext, AuthProvider, ProtectedRoute }
+export { AuthContext, AuthProvider, ProtectedRoute };
