@@ -45,6 +45,10 @@ const AuthProvider = ({ children }) => {
     const res = await register(email, password)
     setToken(res.data.token)
 
+    if (res.status === 'fail') {
+      return
+    }
+
     navigate("/verification")
   }
 
@@ -60,7 +64,7 @@ const AuthProvider = ({ children }) => {
 
     localStorage.setItem("token", token)
 
-    await createProfile(
+    const res = await createProfile(
       userId,
       firstName,
       lastName,
@@ -69,6 +73,10 @@ const AuthProvider = ({ children }) => {
       mobile,
       bio
     )
+
+    if (res.status === "fail") {
+      return
+    }
 
     navigate("/")
   }
