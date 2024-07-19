@@ -1,9 +1,11 @@
 const ErrorMessage = ({message}) => {
-  return (
-    <div>
-      {message && <p>{message}</p>}
-    </div>
-  )
+    return (
+      <div className="usermessage">
+        {message && <p>{message}</p>}
+      </div>
+    )
+  
 }
 
 export default ErrorMessage
+

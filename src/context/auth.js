@@ -33,10 +33,12 @@ const AuthProvider = ({ children }) => {
 			if(!validatedEmail) {
 				throw new Error(emailErrorMessage)
 			}
+
 			const validatedPassword = validationPassword(password)
 			if(!validatedPassword) {
 				throw new Error(passwordRequirments)
 			}
+			
 			const res = await login(email, password)
 			if(!res.status) {
 				throw new Error(res.error.message)

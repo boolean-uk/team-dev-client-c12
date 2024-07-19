@@ -17,7 +17,6 @@ const Register = () => {
 		setErrors('')
 	};
 
-
 	return (
 		<div className="bg-blue register credentialpage">
 			<CredentialsCard
@@ -44,9 +43,6 @@ const Register = () => {
 							type={"password"}
 						/>
 						<ErrorMessage message= {errors}/>
-						<label>
-							your password should be atleast 8 characters,includes numbers and capital letters and also one special character
-						</label>
 					</form>
 					
 					<Button
