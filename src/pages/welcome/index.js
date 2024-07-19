@@ -32,6 +32,8 @@ const Welcome = () => {
 		onCreateProfile(profile.firstName, profile.lastName, profile.username, profile.githubUsername, profile.bio, profile.mobile);
 	};
 
+	const canProgress = profile.firstName.length !== 0 && profile.lastName.length !== 0
+
 	return (
 		<main className="welcome">
 			<div className="welcome-titleblock">
@@ -39,7 +41,7 @@ const Welcome = () => {
 				<p className="text-blue1">Create your profile to get started</p>
 			</div>
 
-			<Stepper header={<WelcomeHeader />} onComplete={onComplete}>
+			<Stepper header={<WelcomeHeader />} onComplete={onComplete} canProgress={canProgress}>
 				<StepOne data={profile} setData={onChange} />
 				<StepTwo data={profile} setData={onChange} />
 				<StepThree data={profile} />

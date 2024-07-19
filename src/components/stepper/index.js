@@ -4,7 +4,7 @@ import Button from "../button";
 import "./style.css";
 import { useState } from "react";
 
-const Stepper = ({ header, children, onComplete }) => {
+const Stepper = ({ header, children, onComplete, canProgress = true }) => {
     const [currentStep, setCurrentStep] = useState(0)
 
     const onBackClick = () => {
@@ -14,6 +14,10 @@ const Stepper = ({ header, children, onComplete }) => {
     }
 
     const onNextClick = () => {
+        if (!canProgress) {
+            return
+        }
+        
         if (currentStep === children.length-1) {
             onComplete()
             return
@@ -34,8 +38,12 @@ const Stepper = ({ header, children, onComplete }) => {
             {children[currentStep]}
 
             <div className="stepper-buttons">
-                <Button text="Back" classes="offwhite" onClick={onBackClick} />
-                <Button text={btnText} classes="blue" onClick={onNextClick} />
+                {currentStep > 0 && 
+                    <Button text="Back" classes="offwhite back" onClick={onBackClick} />
+                }
+                <div className="next">
+                    <Button text={btnText} classes="blue" onClick={onNextClick} />
+                </div>
             </div>
         </Card>
 	);

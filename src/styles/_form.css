@@ -1,56 +1,62 @@
 form input {
-	background: var(--color-blue5);
-	border: 1px solid transparent;
-	border-radius: 8px;
-	padding: 16px;
-	font-size: 18px;
-	line-height: 1.33;
-	width: 100%;
+  background: var(--color-blue5);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  width: 100%;
 }
 form input:focus {
-	border: 1px solid var(--color-blue2);
+  border: 1px solid var(--color-blue2);
 }
 form label {
-	color: var(--color-blue1);
-	line-height: 1.5;
-	margin-bottom: 2px;
-	padding-left: 15px;
+  color: var(--color-blue1);
+  line-height: 1.5;
+  margin-bottom: 2px;
+  padding-left: 15px;
 }
 
 .inputwrapper {
-	position: relative;
+  position: relative;
 }
 
 .input-icon {
-    position: absolute;
-    right: 16px;
-    padding-top: 8px;
+  position: absolute;
+  right: 16px;
+  padding-top: 8px;
 }
+
 .input-has-icon {
-    padding-left: 56px;
-    padding-right: 10px;
+  padding-left: 56px;
+  padding-right: 10px;
 }
 
 .showpasswordbutton {
-	position: absolute;
-	bottom: 28px;
-	right: 16px;
-	z-index: 2;
-	background: none;
-	transform: translateY(19px);
-	transition: all 0.2s ease;
+  position: absolute;
+  bottom: 28px;
+  right: 16px;
+  z-index: 2;
+  background: none;
+  transform: translateY(19px);
+  transition: all 0.2s ease;
 }
 .showpasswordbutton:hover {
-	opacity: 0.7;
+  opacity: 0.7;
 }
 .showpasswordbutton.__faded {
-	opacity: 0.4;
+  opacity: 0.4;
 }
 
 .passwordreveal {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	width: 100%;
-	z-index: 1;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
 }
