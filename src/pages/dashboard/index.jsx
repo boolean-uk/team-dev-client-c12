@@ -1,84 +1,116 @@
-import { useEffect, useState, useRef } from 'react'
-import { useNavigate } from 'react-router-dom';
-import SearchIcon from '../../assets/icons/searchIcon'
-import Button from '../../components/button'
-import Card from '../../components/card'
-import CreatePostModal from '../../components/createPostModal'
-import Posts from '../../components/posts'
-import useModal from '../../hooks/useModal'
-import './style.css'
-import { getUsers } from '../../service/apiClient'
-import ProfileCircle from '../../components/profileCircle'
-import EllipsisIcon from '../../assets/icons/ellipsisIcon'
-import Menu from '../../components/menu'
-import MenuItem from '../../components/menu/menuItem'
-import ProfileIcon from '../../assets/icons/profileIcon'
-import UserProfileIcon from '../../components/UserProfileIcon'
-import UserLists from '../../components/userLists';
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import SearchIcon from "../../assets/icons/searchIcon";
+import Button from "../../components/button";
+import Card from "../../components/card";
+import CreatePostModal from "../../components/createPostModal";
+import Posts from "../../components/posts";
+import useModal from "../../hooks/useModal";
+import "./style.css";
+import { getUsers } from "../../service/apiClient";
+import ProfileCircle from "../../components/profileCircle";
+import EllipsisIcon from "../../assets/icons/ellipsisIcon";
+import Menu from "../../components/menu";
+import MenuItem from "../../components/menu/menuItem";
+import ProfileIcon from "../../assets/icons/profileIcon";
+import UserProfileIcon from "../../components/UserProfileIcon";
+import UserLists from "../../components/userLists";
+import useUser from "../../hooks/useUser";
 
 const Dashboard = () => {
-  const [searchVal, setSearchVal] = useState('')
-  const [isSearchResVisible, setIsSearchResVisible] = useState(false)
-  const [cohorts, setCohorts] = useState([])
-  const [isStudentModalVisible, setIsStudentModalVisible] = useState(false)
-  const [selectedProfileId, setSelectedProfileId] = useState(null)
-  const menuRef = useRef(null)
-  const navigate = useNavigate()
+  const [searchVal, setSearchVal] = useState("");
+  const [isSearchResVisible, setIsSearchResVisible] = useState(false);
+  const [cohorts, setCohorts] = useState([]);
+  const [isStudentModalVisible, setIsStudentModalVisible] = useState(false);
+  const [selectedProfileId, setSelectedProfileId] = useState(null);
+  const [teachers, setTeachers] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [isTeacher, setIsTeacher] = useState(false);
+  const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const { currentUser } = useUser();
 
   useEffect(() => {
-    getUsers().then(setCohorts)
-  }, [])
+    getUsers().then(setCohorts);
+    getTeachers();
+    getStudents();
+  }, []);
 
   const onClickSearchBar = () => {
-    setIsSearchResVisible(true)
-  }
+    setIsSearchResVisible(true);
+  };
 
   const onChange = (e) => {
-    setSearchVal(e.target.value)
-  }
-
-  // console.log(cohorts);
+    setSearchVal(e.target.value);
+  };
 
   const result = cohorts.filter((cohort) => {
     if (cohort.firstName && cohort.lastName) {
-      const fullName = `${cohort.firstName || ''} ${
-        cohort.lastName || ''
-      }`.toLowerCase()
-      return fullName.includes(searchVal.toLowerCase())
+      const fullName = `${cohort.firstName || ""} ${
+        cohort.lastName || ""
+      }`.toLowerCase();
+      return fullName.includes(searchVal.toLowerCase());
     }
-  })
+  });
 
   const handleClickOutside = (event) => {
     if (
-      !event.target.closest('.search-cohorts-results') &&
-      !event.target.closest('#input-wrapper-search-bar')
+      !event.target.closest(".search-cohorts-results") &&
+      !event.target.closest("#input-wrapper-search-bar")
     ) {
-      setIsSearchResVisible(false)
-      setIsStudentModalVisible(false)
-      setSelectedProfileId(null)
+      setIsSearchResVisible(false);
+      setIsStudentModalVisible(false);
+      setSelectedProfileId(null);
     }
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside)
+    document.addEventListener("click", handleClickOutside);
     return () => {
-      document.removeEventListener('click', handleClickOutside)
-    }
-  }, [])
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   const onClickStudent = (id) => {
-    setSelectedProfileId(id)
-    setIsStudentModalVisible(true)
-  }
+    setSelectedProfileId(id);
+    setIsStudentModalVisible(true);
+  };
 
-  const { openModal, setModal } = useModal()
+  const { openModal, setModal } = useModal();
 
   const showModal = () => {
-    setModal('Create a post', <CreatePostModal />)
-    openModal()
-  }
+    setModal("Create a post", <CreatePostModal />);
+    openModal();
+  };
 
-  const allSearchResults = () => navigate('/search-results', { state: { results: result, searchVal } })
+  const allSearchResults = () =>
+    navigate("/search-results", { state: { results: result, searchVal } });
+
+  const getTeachers = () => {
+    if (cohorts.length > 0) {
+      const findTeacher = cohorts.map((u) => {
+        if (u.role === "TEACHER") return u;
+      });
+      const isTeacher = findTeacher.filter((u) => {
+        if (u !== undefined) return u;
+      });
+      setTeachers(isTeacher);
+    }
+  };
+
+  const getStudents = () => {
+    if (cohorts.length > 0) {
+      const studentsInCohort = cohorts.filter((u) => {
+        if (u.cohortId === currentUser.cohortId) return u;
+      });
+      setStudents(studentsInCohort);
+    }
+  };
+
+  const userIsTeacher = currentUser?.role === "TEACHER";
+  if (userIsTeacher) {
+    setIsTeacher(true);
+  }
 
   return (
     <>
@@ -135,8 +167,8 @@ const Dashboard = () => {
                 <li className="user-search-card" key={cohort.id}>
                   <ProfileCircle
                     initials={[
-                      cohort.firstName?.split(' ')[0],
-                      cohort.lastName?.split(' ')[0],
+                      cohort.firstName?.split(" ")[0],
+                      cohort.lastName?.split(" ")[0],
                     ]}
                     hasCascadingMenu={false}
                   />
@@ -159,27 +191,35 @@ const Dashboard = () => {
               ))}
             </ul>
 
-            {result.length >= 10 &&
-              <button onClick={allSearchResults}>
-                All results
-              </button>}
+            {result.length >= 10 && (
+              <button onClick={allSearchResults}>All results</button>
+            )}
           </article>
         )}
 
-        <Card name={'cohorts'}>
+        <Card name={"cohorts"}>
           <h4>My Cohort</h4>
+          <UserLists results={students} />
         </Card>
-        <Card name={'students'}>
-          <h4>Students</h4>
-          <UserLists />
-        </Card>
-        <Card name={'teachers'}>
-          <h4>Teachers</h4>
-          <UserLists />
-        </Card>
+        {isTeacher && (
+          <>
+            <Card>
+              <h4>Cohorts</h4>
+              <UserLists />
+            </Card>
+            <Card name={"students"}>
+              <h4>Students</h4>
+              <UserLists results={cohorts} />
+            </Card>
+            <Card name={"teachers"}>
+              <h4>Teachers</h4>
+              <UserLists results={teachers} />
+            </Card>
+          </>
+        )}
       </aside>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

@@ -9,6 +9,7 @@ import Navigation from '../../components/navigation';
 import Card from '../../components/card';
 import { getUsers } from '../../service/apiClient';
 import './style.css';
+import UserLists from '../../components/userLists';
 
 const AllSearchResults = () => {
   const location = useLocation();
@@ -82,36 +83,7 @@ const AllSearchResults = () => {
                     </div>
 
                     <div className='search-results'>
-                          <Card className='search-results-card' name="results">
-                              {results.length === 0 && (
-                                  <p>No results found.</p>
-                              )} 
-                              {results.length > 0 && (
-                                <ul className='search-results-list'>
-                                {results.map((user) => (
-                                    <li key={user.id} className="found-user-card">
-                                        <ProfileCircle
-                                            initials={getInitials(user.firstName, user.lastName)}
-                                            hasCascadingMenu={false}
-                                        />
-
-                                        <div className='found-user-details'>
-                                            <span>{`${user.firstName} ${user.lastName}`}</span>
-                                            <p>Software Developer</p>
-                                        </div>
-
-                                        <div>
-                                            <p>Profile</p>
-                                        </div>   
-
-                                        <figure className='link-to-profile' onClick={() => onClickStudent(cohort.id)}>
-                                            <EllipsisIcon />
-                                        </figure>
-                                    </li>
-                                ))}
-                                </ul>
-                            )}
-                        </Card>
+                        <UserLists results={results}/>
                     </div>
                   </div>
               </main>
