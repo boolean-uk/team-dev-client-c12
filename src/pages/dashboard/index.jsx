@@ -14,6 +14,7 @@ import Menu from '../../components/menu'
 import MenuItem from '../../components/menu/menuItem'
 import ProfileIcon from '../../assets/icons/profileIcon'
 import UserProfileIcon from '../../components/UserProfileIcon'
+import UserLists from '../../components/userLists';
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState('')
@@ -167,6 +168,14 @@ const Dashboard = () => {
 
         <Card name={'cohorts'}>
           <h4>My Cohort</h4>
+        </Card>
+        <Card name={'students'}>
+          <h4>Students</h4>
+          <UserLists />
+        </Card>
+        <Card name={'teachers'}>
+          <h4>Teachers</h4>
+          <UserLists />
         </Card>
       </aside>
     </>
