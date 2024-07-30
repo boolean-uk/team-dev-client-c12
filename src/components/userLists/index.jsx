@@ -20,8 +20,8 @@ const UserLists = ({ results }) => {
 
   return (
     <Card className="search-results-card" name="results">
-      {results.length === 0 && <p>No results found.</p>}
-      {results.length > 0 && (
+      {results?.length === 0 && <p>No results found.</p>}
+      {results?.length > 0 && (
         <ul className="search-results-list">
           {results.map((user) => (
             <li key={user.id} className="found-user-card">

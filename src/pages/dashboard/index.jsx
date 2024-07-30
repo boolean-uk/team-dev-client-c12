@@ -34,6 +34,7 @@ const Dashboard = () => {
     getUsers().then(setCohorts);
     getTeachers();
     getStudents();
+    verifyTeacher()
   }, []);
 
   const onClickSearchBar = () => {
@@ -87,7 +88,7 @@ const Dashboard = () => {
     navigate("/search-results", { state: { results: result, searchVal } });
 
   const getTeachers = () => {
-    if (cohorts.length > 0) {
+    if (cohorts.length > 1) {
       const findTeacher = cohorts.map((u) => {
         if (u.role === "TEACHER") return u;
       });
@@ -99,7 +100,7 @@ const Dashboard = () => {
   };
 
   const getStudents = () => {
-    if (cohorts.length > 0) {
+    if (cohorts.length > 1) {
       const studentsInCohort = cohorts.filter((u) => {
         if (u.cohortId === currentUser.cohortId) return u;
       });
@@ -107,10 +108,13 @@ const Dashboard = () => {
     }
   };
 
-  const userIsTeacher = currentUser?.role === "TEACHER";
-  if (userIsTeacher) {
-    setIsTeacher(true);
+  const verifyTeacher = () => {
+    const userIsTeacher = currentUser?.role === "TEACHER";
+    if (userIsTeacher) {
+      setIsTeacher(true);
+    }
   }
+  console.log(teachers, students)
 
   return (
     <>
@@ -196,11 +200,12 @@ const Dashboard = () => {
             )}
           </article>
         )}
-
-        <Card name={"cohorts"}>
-          <h4>My Cohort</h4>
-          <UserLists results={students} />
+        {!isTeacher && (
+          <Card name={"cohorts"}>
+            <h4>My Cohort</h4>
+            <UserLists results={students} />
         </Card>
+        )}
         {isTeacher && (
           <>
             <Card>
