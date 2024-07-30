@@ -2,7 +2,6 @@ import "./style.css";
 import ProfileCircle from "../profileCircle/index.jsx";
 import Card from "../card/index.jsx";
 import EllipsisIcon from "../../assets/icons/ellipsisIcon.jsx";
-
 const UserLists = ({ results, name }) => {
 
     const getInitials = (firstName, lastName) => {

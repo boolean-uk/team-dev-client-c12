@@ -1,9 +1,7 @@
-import EllipsisIcon from '../../assets/icons/ellipsisIcon'
 import { useState, useEffect, useRef } from 'react';
 import {useLocation, Link } from 'react-router-dom';
 import SearchIcon from '../../assets/icons/searchIcon';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
-import ProfileCircle from '../../components/profileCircle';
 import Header from '../../components/header';
 import Navigation from '../../components/navigation';
 import Card from '../../components/card';

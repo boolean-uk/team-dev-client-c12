@@ -92,18 +92,14 @@ const Dashboard = () => {
       const findTeacher = cohorts.map((u) => {
         if (u.role === "TEACHER") return u;
       });
-      const isTeacher = findTeacher.filter((u) => {
-        if (u !== undefined) return u;
-      });
+      const isTeacher = findTeacher.filter((u) => u !== undefined);
       setTeachers(isTeacher);
     }
   };
 
   const getStudents = () => {
     if (cohorts.length > 1) {
-      const studentsInCohort = cohorts.filter((u) => {
-        if (u.cohortId === currentUser.cohortId) return u;
-      });
+      const studentsInCohort = cohorts.filter((u) => u.cohortId === currentUser.cohortId);
       setStudents(studentsInCohort);
     }
   };
