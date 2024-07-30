@@ -11,6 +11,7 @@ import MenuItem from '../menu/menuItem'
 import './style.css'
 import useAuth from '../../hooks/useAuth'
 
+
 const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
   const { useClickOutside } = useAuth()
   const [isMenuVisible, setIsMenuVisible] = useState(false)
@@ -54,7 +55,8 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
 const CascadingMenu = () => {
   return (
     <Menu className="profile-circle-menu">
-      <MenuItem icon={<ProfileIcon />} text="Profile" />
+      <MenuItem icon={<ProfileIcon />} text="Profile" linkTo="/profile"/>
+
       <MenuItem icon={<AddIcon />} text="Add note" />
 
       <MenuItem icon={<CohortIcon />} text="Move to cohort">
