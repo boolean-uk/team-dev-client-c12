@@ -42,8 +42,8 @@ const Dashboard = () => {
   };
 
   const onChange = (e) => {
-    setSearchVal(e.target.value);
-  };
+    setSearchVal(e.target.value)
+  }
 
   const result = cohorts.filter((cohort) => {
     if (cohort.firstName && cohort.lastName) {
