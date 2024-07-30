@@ -63,7 +63,7 @@ async function get(endpoint, auth = true) {
 }
 
 async function createCohort(cohortData) {
-  return await post('cohorts', { startDate, endDate })
+  return await post('cohorts', { cohortName, cohortType, startDate, endDate } = cohortData)
 }
 
 async function request(method, endpoint, data, auth = true) {
