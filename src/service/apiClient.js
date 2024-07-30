@@ -62,6 +62,10 @@ async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth)
 }
 
+async function createCohort(cohortData) {
+  return await post('cohorts', { cohortName, cohortType, startDate, endDate } = cohortData)
+}
+
 async function request(method, endpoint, data, auth = true) {
   const opts = {
     headers: {
@@ -83,4 +87,13 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
-export { login, getUsers, getPosts, register, createProfile, getUser, createPost }
+export {
+	login,
+	getUsers,
+	getPosts,
+	register,
+	createProfile,
+	getUser,
+	createPost,
+	createCohort,
+}
