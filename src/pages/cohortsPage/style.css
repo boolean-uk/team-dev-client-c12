@@ -1,0 +1,21 @@
+.cohorts-page-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+    background-color: #f0f5fa;
+}
+
+.cohorts-page-header {
+    grid-column: 1 / -1;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.cohorts-page-left-bar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
