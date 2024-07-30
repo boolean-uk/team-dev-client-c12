@@ -7,6 +7,7 @@ import SearchIcon from '../../assets/icons/searchIcon';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
 import Header from '../../components/header';
 import Navigation from '../../components/navigation';
+import ProfileCircle from '../../components/profileCircle';
 import Card from '../../components/card';
 import { getUsers } from '../../service/apiClient';
 import './style.css';

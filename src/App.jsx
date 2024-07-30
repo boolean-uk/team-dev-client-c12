@@ -11,6 +11,7 @@ import { ModalProvider } from "./context/modal";
 import { CurrentUserProvider } from "./context/currentUser";
 import Welcome from "./pages/welcome";
 import AllSearchResults from "./pages/allSearchResults";
+import Cohorts from './pages/cohortsPage'
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
                 }
               />
               <Route path="/search-results" element={<AllSearchResults />} />
+              <Route path="/cohorts" element={<Cohorts />} />
               <Route
                 path="profile"
                 element={
