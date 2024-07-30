@@ -9,22 +9,26 @@ import Button from '../../components/button';
 import useModal from '../../hooks/useModal'
 import CreateCohortModal from '../../components/createCohortModal';
 import Card from '../../components/card';
+import CohortIcon from '../../assets/icons/cohortIcon';
 import './style.css';
 
 const Cohorts = () => {
     const { currentUser } = useUser()
-    const [cohorts, setCohorts] = useState()
+    const [cohorts, setCohorts] = useState([])
     const { openModal, setModal } = useModal()
 
     useEffect(() => {
-        getCohorts()
+        getCohorts().then(setCohorts)
         window.scrollTo(0,0)
     }, [])
+
+    console.log(cohorts);
+
 
     const showModal = () => {
         setModal('Create a new cohort', <CreateCohortModal />)
         openModal()
-  }
+    }
 
 
 
@@ -37,6 +41,24 @@ const Cohorts = () => {
                     <div className='cohorts-list-top'>
                         <h2>Cohorts</h2>
                         <Button text="Add cohort" onClick={showModal} />
+                    </div>
+                    <div className='all-cohorts'>
+                        <Card className='all-cohorts-card' name='Cohorts' >
+                            {cohorts.length === 0 && (
+                                <p>There are no cohorts to display</p>
+                            )}
+                            {cohorts.length > 0 && (
+                                <ul className='all-cohorts-list'>
+                                    {cohorts.map((cohort) => (
+                                        <li key={cohort.id} className='cohort-card'>
+                                            <CohortIcon/>
+                                            <p>{cohort.id }</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                                
+                            )}
+                        </Card>
                     </div>
                 </main>
             </div>
