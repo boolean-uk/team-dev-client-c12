@@ -5,7 +5,6 @@ import ThreeDotsMenu from '../../components/threeDotsMenu';
 import SimpleThreeDotsMenu from '../../components/simpleThreeDotsMenu';
 import SearchIcon from '../../assets/icons/searchIcon';
 import ArrowLeftIcon from '../../assets/icons/arrowLeftIcon';
-import ProfileCircle from '../../components/profileCircle';
 import Header from '../../components/header';
 import Navigation from '../../components/navigation';
 import Card from '../../components/card';
