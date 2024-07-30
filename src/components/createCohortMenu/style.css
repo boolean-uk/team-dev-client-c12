@@ -1,0 +1,25 @@
+.add-cohort-menu-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-rows: auto;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.add-cohort-contents {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 30rem;
+    height: 75%;
+    display: grid;
+    grid-template-rows: auto;
+    gap: 3rem;
+}

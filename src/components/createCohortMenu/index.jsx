@@ -3,6 +3,7 @@ import useModal from "../../hooks/useModal";
 import UserDetails from "../UserDetails";
 import Button from "../button";
 import { createCohort } from "../../service/apiClient";
+import './style.css';
 
 const AddCohortMenu = () => {
     const { closeModal } = useModal()
@@ -49,67 +50,69 @@ const AddCohortMenu = () => {
 
     return (
         <>
-            <div className="top-title">
-                <h1>Add cohort</h1>
-                <p>Create a new cohort</p>
-            </div>
+            <main className="add-cohort-menu-container">
+                <div className="add-cohort-contents">
+                    <div className="top-title">
+                        <h3>Add cohort</h3>
+                        <p>Create a new cohort</p>
+                    </div>
 
-            <section>
-                <label>
-                    Cohort Name*:
-                    <input
-                        type="text"
-                        value={cohortName}
-                        onChange={onEnterCohortName}
-                        placeholder="Enter cohort name"
-                    />
-                </label>
-            </section>
+                    <section>
+                        <label>
+                            Cohort Name*: 
+                            <input
+                                type="text"
+                                value={cohortName}
+                                onChange={onEnterCohortName}
+                                placeholder=" Enter cohort name"
+                            />
+                        </label>
+                    </section>
 
-            <section>
-                <label>
-                    Course*:
-                    <select value={course} onChange={onSelectCourse}>
-                        <option value="">Select a course</option>
-                        <option value="SoftDev">Software Development</option>
-                        <option value="FrontEndDev">Front-end Development</option>
-                        <option value="DataAnalytics">Data Analytics</option>
-                    </select>
-                </label>
-            </section>
+                    <section>
+                        <label>
+                            Course*:
+                            <select value={course} onChange={onSelectCourse}>
+                                <option value=""> Select a course</option>
+                                <option value="SoftwareDev">Software Development</option>
+                                <option value="FrontEndDev">Front-end Development</option>
+                                <option value="DataAnalytics">Data Analytics</option>
+                            </select>
+                        </label>
+                    </section>
 
-            <section>
-                <label>
-                    Start Date:
-                    <input
-                        type="date"
-                        value={startDate}
-                        onChange={onSetStartDate}
-                    />
-                </label>
-            </section>
+                    <section>
+                        <label>
+                            Start Date: 
+                            <input
+                                type="date"
+                                value={startDate}
+                                onChange={onSetStartDate}
+                            />
+                        </label>
+                    </section>
 
-            <section>
-                <label>
-                    End Date:
-                    <input
-                        type="date"
-                        value={endDate}
-                        onChange={onSetEndDate}
-                    />
-                </label>
-            </section>
+                    <section>
+                        <label>
+                            End Date:
+                            <input
+                                type="date"
+                                value={endDate}
+                                onChange={onSetEndDate}
+                            />
+                        </label>
+                    </section>
 
-            <div className="footnote">
-                <p>*Required</p>
-            </div>
+                    <div className="footnote">
+                        <p>*Required</p>
+                    </div>
 
-            {/* <div className="buttons">
-                <button>
-                    
-                </button>
-            </div> */}
-
+                    <div className="buttons">
+                        <Button/>
+                        <Button/>
+                    </div>                                          
+                </div>
+            </main>
         </>
     )    
 }
