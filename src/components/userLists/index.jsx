@@ -1,11 +1,9 @@
 import "./style.css";
-import "../../pages/allSearchResults/style.css";
 import ProfileCircle from "../profileCircle/index.jsx";
 import Card from "../card/index.jsx";
 import EllipsisIcon from "../../assets/icons/ellipsisIcon.jsx";
-import { useState } from "react";
 
-const UserLists = ({ results }) => {
+const UserLists = ({ results, name }) => {
 
     const getInitials = (firstName, lastName) => {
     const firstInitial = firstName ? firstName[0].toUpperCase() : "";
@@ -19,7 +17,7 @@ const UserLists = ({ results }) => {
   };
 
   return (
-    <Card className="search-results-card" name="results">
+    <Card name={name}>
       {results?.length === 0 && <p>No results found.</p>}
       {results?.length > 0 && (
         <ul className="search-results-list">

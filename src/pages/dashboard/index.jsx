@@ -129,7 +129,7 @@ const Dashboard = () => {
         <Posts />
       </main>
 
-      <aside>
+      <aside className="dash-aside">
         <Card>
           <form onSubmit={(e) => e.preventDefault()} onClick={onClickSearchBar}>
             <div id="input-wrapper-search-bar">
@@ -201,24 +201,24 @@ const Dashboard = () => {
           </article>
         )}
         {!isTeacher && (
-          <Card name={"cohorts"}>
+          <Card name={"user-lists"}>
             <h4>My Cohort</h4>
-            <UserLists results={students} />
-        </Card>
+            <UserLists results={students} name={"myCohort"}/>
+          </Card>
         )}
         {isTeacher && (
           <>
-            <Card>
+            <Card name={"user-lists"}>
               <h4>Cohorts</h4>
-              <UserLists />
+              <UserLists name={"cohorts"}/>
             </Card>
-            <Card name={"students"}>
+            <Card name={"user-lists"}>
               <h4>Students</h4>
-              <UserLists results={cohorts} />
+              <UserLists results={cohorts} name={"students"}/>
             </Card>
-            <Card name={"teachers"}>
+            <Card name={"user-lists"}>
               <h4>Teachers</h4>
-              <UserLists results={teachers} />
+              <UserLists results={teachers} name={"teachers"}/>
             </Card>
           </>
         )}

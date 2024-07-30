@@ -83,7 +83,7 @@ const AllSearchResults = () => {
                     </div>
 
                     <div className='search-results'>
-                        <UserLists results={results}/>
+                        <UserLists results={results} name={"results"}/>
                     </div>
                   </div>
               </main>
