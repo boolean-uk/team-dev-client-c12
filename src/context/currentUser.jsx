@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode'
 import { getUser } from '../service/apiClient'
 import { useLocation, useNavigate, redirect } from 'react-router-dom'
 
-export const CurrentUserContext = createContext()
+export const CurrentUserContext = createContext();
 
 export const CurrentUserProvider = ({ children }) => {
     const { token, user } = useAuth()
@@ -45,13 +45,13 @@ export const CurrentUserProvider = ({ children }) => {
         }
     }, [token, currentUser, location.pathname])
 
-    return (
-        <CurrentUserContext.Provider
-            value={{
-                currentUser,
-            }}
-        >
-            {children}
-        </CurrentUserContext.Provider>
-    )
-}
+  return (
+    <CurrentUserContext.Provider
+      value={{
+        currentUser,
+      }}
+    >
+      {children}
+    </CurrentUserContext.Provider>
+  );
+};

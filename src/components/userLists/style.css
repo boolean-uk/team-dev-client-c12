@@ -1,0 +1,84 @@
+.search-results-container {
+    display: inline;
+    margin-left: 6rem;
+    width: 75%;
+}
+  
+.title {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    justify-items: start;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+  
+.title h2{
+    padding-left: 0.7rem;
+}
+  
+.search-bar-container {
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+}
+  
+.search-page-search-bar {
+    display: grid;
+    height: 4rem;
+    grid-template-columns: max-content 1fr;
+    gap: 0.5rem;
+    align-items: center;
+    background-color: #e6ebf5;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+  
+.search-page-input{
+    font-size: large;
+    background-color: #e6ebf5;
+}
+  
+.search-results {
+    margin-left: 3rem;
+}
+  
+.search-results-list {
+    display: grid;
+    gap: 2rem;
+    grid-template-rows: auto;
+}
+  
+  
+.found-user-card {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 5fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+  
+.found-user-details p {
+    color: #64648c
+}
+  
+.link-to-profile {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f5fa;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+.card.students, .card.teachers, .card.cohorts, .card.myCohort {
+    border: none;
+    padding: 10px 0px;
+    border-top: 1px #e6ebf5 solid;
+}
+
+.card.user-lists h4 {
+    padding-bottom: 12px;
+}
+
+

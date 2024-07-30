@@ -27,7 +27,7 @@ const Navigation = ({ disabledNav = false }) => {
                 text: "Home"
             },
             {
-                to: "/",
+                to: "/profile",
                 icon: <ProfileIcon />,
                 text: "Profile"
             },

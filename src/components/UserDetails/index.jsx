@@ -10,13 +10,15 @@ export default function UserDetails({ header = false }) {
     const userCohort = currentUser?.cohortId ? `, Cohort ${currentUser.cohortId}` : ''
 
     const userFullName = `${currentUser?.firstName} ${currentUser?.lastName}`
+    
+    const stringToTitleCase = string => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 
     if (header) {        
         return (
             <div className="post-user-name">
                 <p>{userFullName}</p>
                 <small>
-                    {currentUser.role} {userCohort}
+                    {stringToTitleCase(currentUser.role)}{userCohort}
                 </small>
             </div>
         )

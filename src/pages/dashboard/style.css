@@ -100,3 +100,8 @@ aside {
 .card.dashboard-card-post {
   margin-bottom: 1.563rem;
 }
+
+.dash-aside {
+  display: grid;
+  gap: 1.6rem;
+}
