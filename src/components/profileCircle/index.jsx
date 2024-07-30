@@ -16,7 +16,6 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
   const { useClickOutside } = useAuth()
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const profileRef = useRef(null)
-  console.log(profileRef)
 
   useClickOutside(profileRef, () => {
     setIsMenuVisible(false)
