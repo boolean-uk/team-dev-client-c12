@@ -29,7 +29,7 @@ const UserLists = ({ results, name }) => {
 
               <div className="found-user-details">
                 <span>{`${user.firstName} ${user.lastName}`}</span>
-                <p>Software Developer</p>
+                <p>{`${user.cohort}`}</p>
               </div>
 
               <div>
