@@ -7,6 +7,7 @@ import LogsIcon from '../../assets/icons/logsIcon'
 import NotesIcon from '../../assets/icons/notesIcon'
 import useAuth from '../../hooks/useAuth'
 import useUser from '../../hooks/useUser'
+import Cohorts from '../../pages/cohortsPage'
 import './style.css'
 
 const Navigation = ({ disabledNav = false }) => {
@@ -31,7 +32,7 @@ const Navigation = ({ disabledNav = false }) => {
                 text: "Profile"
             },
             {
-                to: "/",
+                to: "/cohorts",
                 icon: <CohortIcon />,
                 text: "Cohort"
             },

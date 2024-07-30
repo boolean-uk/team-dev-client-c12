@@ -7,12 +7,14 @@ import Header from '../../components/header';
 import Navigation from '../../components/navigation';
 import Button from '../../components/button';
 import useModal from '../../hooks/useModal'
+import CreateCohortModal from '../../components/createCohortModal';
 import Card from '../../components/card';
 import './style.css';
 
 const Cohorts = () => {
     const { currentUser } = useUser()
     const [cohorts, setCohorts] = useState()
+    const { openModal, setModal } = useModal()
 
     useEffect(() => {
         getCohorts()
@@ -20,7 +22,7 @@ const Cohorts = () => {
     }, [])
 
     const showModal = () => {
-        setModal('Create a post', <CreatePostModal />)
+        setModal('Create a new cohort', <CreateCohortModal />)
         openModal()
   }
 
@@ -34,7 +36,7 @@ const Cohorts = () => {
                 <main className='cohorts-container'>
                     <div className='cohorts-list-top'>
                         <h2>Cohorts</h2>
-                        
+                        <Button text="Add cohort" onClick={showModal} />
                     </div>
                 </main>
             </div>
