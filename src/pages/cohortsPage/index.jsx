@@ -5,8 +5,7 @@ import { getCohorts, createCohort } from '../../service/apiClient';
 import useUser from '../../hooks/useUser';
 import Header from '../../components/header';
 import Navigation from '../../components/navigation';
-import Button from '../../components/button';
-import useModal from '../../hooks/useModal'
+import Button from '../../components/button'
 import AddCohortMenu from '../../components/createCohortMenu';
 import Card from '../../components/card';
 import CohortIcon from '../../assets/icons/cohortIcon';
@@ -14,6 +13,7 @@ import './style.css';
 
 const Cohorts = () => {
     const { currentUser } = useUser()
+    const menuRef = useRef(null);
     const [cohorts, setCohorts] = useState([])
     const [addCohortMenu, setAddCohortMenu] = useState(false)
     
@@ -21,6 +21,23 @@ const Cohorts = () => {
         getCohorts().then(setCohorts)
         window.scrollTo(0,0)
     }, [])
+
+    const handleClickOutside = (event) => {
+        if (menuRef.current && !menuRef.current.contains(event.target)) {
+            setAddCohortMenu(false);
+        }
+    };
+    
+    useEffect(() => {
+        if (addCohortMenu) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [addCohortMenu]);
 
     return (
         <>
@@ -30,13 +47,15 @@ const Cohorts = () => {
                 <main className='cohorts-container'>
                     <div className='cohorts-list-top'>
                         <h2>Cohorts</h2>
-
-                        <Button className='add-cohort-button' text="Add cohort" onClick={() => setAddCohortMenu(true)} />
-                        
+                        <Button className='add-cohort-button' text="Add cohort" onClick={() => setAddCohortMenu(true)} />                        
                     </div>
                     {addCohortMenu && (
-                        <AddCohortMenu/>
-                    ) }
+                        <div className='add-cohort-menu-container'>
+                            <div ref={menuRef}>
+                                <AddCohortMenu closeMenu={() => setAddCohortMenu(false)} />
+                            </div>
+                        </div>
+                    )}
                     <div className='all-cohorts'>
                         <Card className='all-cohorts-card' name='Cohorts' >
                             {cohorts.length === 0 && (

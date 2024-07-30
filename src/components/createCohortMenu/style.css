@@ -1,55 +1,27 @@
-/* .add-cohort-menu-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: grid;
-    grid-template-rows: auto;
-    gap: 3rem;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.add-cohort-contents {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 30rem;
-    height: 75%;
-    display: grid;
-    grid-template-rows: auto;
-    gap: 3rem;
-} */
-
 .add-cohort-menu-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    /* dark background for modal effect */
-    position: fixed;
-    top: 0;
-    left: 0;
+    width: 35rem;
+    height: 40rem;
+    position: absolute;
+    top: 10%;
+    left: 25%;
     z-index: 1000;
+    background: transparent;
 }
 
-/* Content of the cohort form */
 .add-cohort-contents {
     background: white;
     padding: 40px;
     border-radius: 10px;
-    width: 400px;
+    width: 40rem;
+    height: 40rem;
     max-width: 90%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
-/* Top title section */
 .top-title h3 {
     font-size: 2rem;
     margin-bottom: 10px;
@@ -62,7 +34,6 @@
     margin-bottom: 20px;
 }
 
-/* Form sections */
 .add-cohort-contents section {
     margin-bottom: 20px;
 }
@@ -84,10 +55,27 @@
     background: #f8f9fa;
 }
 
-/* Footnote */
-.footnote {
-    font-size: 0.8rem;
+.footnote p{
+    font-size: small;
     color: #6c757d;
-    margin-top: -10px;
+    margin-top: 10px;
     margin-bottom: 20px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 0.7fr 0.7fr;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.cancel-button Button{
+    background-color: #f0f5fa;
+    width: 0.5rem;
+    color: #6b6b92;
+}
+
+.next-button Button{
+    background-color: #000046;
+    color: #fff;
 }

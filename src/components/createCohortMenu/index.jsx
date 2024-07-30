@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import useModal from "../../hooks/useModal";
-import UserDetails from "../UserDetails";
 import Button from "../button";
 import { createCohort } from "../../service/apiClient";
 import './style.css';
 
-const AddCohortMenu = () => {
+const AddCohortMenu = ({closeMenu}) => {
     const { closeModal } = useModal()
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [cohortName, setCohortName] = useState('')
     const [course, setCourse] = useState('')
     const [message, setMessage] = useState(null)
+    const menuRef = useRef(null);
 
     const onEnterCohortName = (e) => {
         setCohortName(e.target.value)
@@ -108,9 +108,14 @@ const AddCohortMenu = () => {
                     </div>
 
                     <div className="buttons">
-                        <Button/>
-                        <Button/>
-                    </div>                                          
+                        <div className='cancel-button'>
+                            <Button  text='Cancel' onClick={closeMenu}/>                            
+                        </div>
+                        <div className='next-button'>
+                            <Button text='Next' onClick={()=>onSubmit()}/>
+                        </div>
+                    </div>       
+                    {message && <p>{message}</p>}
                 </div>
             </main>
         </>
