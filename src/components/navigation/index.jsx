@@ -26,7 +26,7 @@ const Navigation = ({ disabledNav = false }) => {
                 text: "Home"
             },
             {
-                to: "/",
+                to: "/profile",
                 icon: <ProfileIcon />,
                 text: "Profile"
             },
@@ -70,24 +70,6 @@ const Navigation = ({ disabledNav = false }) => {
     return (
         <nav>
             <ul>
-                <li>
-                    <NavLink to="/">
-                        <HomeIcon colour="#000046" />
-                        <p>Home</p>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/profile">
-                        <ProfileIcon />
-                        <p>Profile</p>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/">
-                        <CohortIcon />
-                        <p>Cohort</p>
-                    </NavLink>
-                </li>
                 {navIcons()}
             </ul>
         </nav>
