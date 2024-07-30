@@ -46,6 +46,12 @@ const getPosts = async () => {
   return res.data.posts
 }
 
+const getCohorts = async () => {
+  const res = await get('cohorts')
+  return res.data.cohorts
+}
+
+
 async function createPost(content) {
   return await post('posts', { content })
 }
@@ -57,6 +63,7 @@ async function post(endpoint, data, auth = true) {
 async function patch(endpoint, data, auth = true) {
   return await request('PATCH', endpoint, data, auth)
 }
+
 
 async function get(endpoint, auth = true) {
   return await request('GET', endpoint, null, auth)
@@ -94,6 +101,7 @@ export {
 	register,
 	createProfile,
 	getUser,
-	createPost,
+  createPost,
+  getCohorts,
 	createCohort,
 }
