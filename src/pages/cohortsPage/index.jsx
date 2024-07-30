@@ -7,7 +7,7 @@ import Header from '../../components/header';
 import Navigation from '../../components/navigation';
 import Button from '../../components/button';
 import useModal from '../../hooks/useModal'
-import CreateCohortModal from '../../components/createCohortModal';
+import AddCohortMenu from '../../components/createCohortMenu';
 import Card from '../../components/card';
 import CohortIcon from '../../assets/icons/cohortIcon';
 import './style.css';
@@ -15,22 +15,12 @@ import './style.css';
 const Cohorts = () => {
     const { currentUser } = useUser()
     const [cohorts, setCohorts] = useState([])
-    const { openModal, setModal } = useModal()
-
+    const [addCohortMenu, setAddCohortMenu] = useState(false)
+    
     useEffect(() => {
         getCohorts().then(setCohorts)
         window.scrollTo(0,0)
     }, [])
-
-    console.log(cohorts);
-
-
-    const showModal = () => {
-        setModal('Create a new cohort', <CreateCohortModal />)
-        openModal()
-    }
-
-
 
     return (
         <>
@@ -40,8 +30,13 @@ const Cohorts = () => {
                 <main className='cohorts-container'>
                     <div className='cohorts-list-top'>
                         <h2>Cohorts</h2>
-                        <Button text="Add cohort" onClick={showModal} />
+
+                        <Button className='add-cohort-button' text="Add cohort" onClick={() => setAddCohortMenu(true)} />
+                        
                     </div>
+                    {addCohortMenu && (
+                        <AddCohortMenu/>
+                    ) }
                     <div className='all-cohorts'>
                         <Card className='all-cohorts-card' name='Cohorts' >
                             {cohorts.length === 0 && (
@@ -53,16 +48,16 @@ const Cohorts = () => {
                                         <li key={cohort.id} className='cohort-card'>
                                             <CohortIcon/>
                                             <p>{cohort.id }</p>
+                                            <p>Start Date:{cohort.startDate }</p>
+                                            <p>End Date:{cohort.endDate }</p>
                                         </li>
                                     ))}
-                                </ul>
-                                
+                                </ul>                                
                             )}
                         </Card>
                     </div>
                 </main>
             </div>
-
         </>
     )
 }

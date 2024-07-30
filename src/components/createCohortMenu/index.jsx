@@ -4,7 +4,7 @@ import UserDetails from "../UserDetails";
 import Button from "../button";
 import { createCohort } from "../../service/apiClient";
 
-const CreateCohortModal = () => {
+const AddCohortMenu = () => {
     const { closeModal } = useModal()
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
@@ -84,7 +84,7 @@ const CreateCohortModal = () => {
                     <input
                         type="date"
                         value={startDate}
-                        onChange={onChangeStartDate}
+                        onChange={onSetStartDate}
                     />
                 </label>
             </section>
@@ -95,7 +95,7 @@ const CreateCohortModal = () => {
                     <input
                         type="date"
                         value={endDate}
-                        onChange={onChangeEndDate}
+                        onChange={onSetEndDate}
                     />
                 </label>
             </section>
@@ -104,14 +104,14 @@ const CreateCohortModal = () => {
                 <p>*Required</p>
             </div>
 
-            <div className="buttons">
+            {/* <div className="buttons">
                 <button>
                     
                 </button>
-            </div>
+            </div> */}
 
         </>
     )    
 }
 
-export default CreateCohortModal
+export default AddCohortMenu
