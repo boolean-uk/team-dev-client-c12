@@ -1,7 +1,35 @@
+/* Common items */
+
+.search-page-header {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.left-bar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.search-page-container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  background-color: #f0f5fa;
+}
+
 .search-results-container {
-  display: inline;
-  margin-left: 6rem;
-  width: 75%;
+  margin-left: 4rem;
+  width: full;
+  overflow-y: auto;
+}
+
+.search-content {
+  width: 70%
 }
 
 .title {
@@ -12,7 +40,7 @@
   margin-bottom: 2rem;
 }
 
-.title h2{
+.title h2 {
   padding-left: 0.7rem;
 }
 
@@ -32,7 +60,7 @@
   border-radius: 0.5rem;
 }
 
-.search-page-input{
+.search-page-input {
   font-size: large;
   background-color: #e6ebf5;
 }
@@ -47,26 +75,301 @@
   grid-template-rows: auto;
 }
 
-
-.found-user-card {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 1fr 5fr 1fr 1fr;
-  align-items: center;
-  justify-content: center;
+.found-user-details {
+  color: #64648c;
+  padding-left: 1rem;
 }
 
 .found-user-details p {
-  color: #64648c
+  color: #64648c;
 }
 
-.link-to-profile {
+.found-user-profile-link {
+  display: flex;
+  align-items: right;
+}
+
+.found-user-profile-link p {
+  color: #64648c;
+  cursor: pointer;
+  margin-left: auto;
+  padding-right: 7rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.allSearchResults-profile-circle-menu {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.asr-link-to-profile {
+  position: relative;
   display: grid;
   align-items: center;
   justify-content: center;
+  justify-self: end;
   background-color: #f0f5fa;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+
+/* Conditionally rendered items */
+
+.search-three-dots-menu {
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  background-color: #f0f5fa;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.search-three-dots-menu ul {
+  position: absolute;
+  transform: translate(-135%, +0%);
+  z-index: 10;
+}
+
+.found-user-card-stdnt {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: auto 5fr 1fr 1fr;
+  align-items: center;
+  justify-items: stretch;
+}
+
+.found-user-card-tchr {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 0.25fr;
+  align-items: center;
+}
+
+.teacher-links {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: right;
+  cursor: pointer;
+}
+
+
+.teacher-links span {
+  color: #64648c;
   cursor: pointer;
 }

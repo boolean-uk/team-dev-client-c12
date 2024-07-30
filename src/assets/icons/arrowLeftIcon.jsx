@@ -3,7 +3,8 @@ const ArrowLeftIcon = ({onClick = null}) => {
         <svg
             width="2.1rem"
             height="2.3rem"
-            viewBox="0 0 20 20"    
+            viewBox="0 0 20 20"
+            fill="#64648c"
             xmlns="http://www.w3.org/2000/svg"
             onClick={onClick}
         >

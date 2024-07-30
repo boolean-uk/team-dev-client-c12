@@ -52,7 +52,7 @@ const Header = () => {
                                       </NavLink>
                                   </li>
                                   <li>
-                                      <NavLink to="#" onClick={onLogout}>
+                                      <NavLink to="/login" onClick={onLogout}>
                                           <LogoutIcon /> <p>Log out</p>
                                       </NavLink>
                                   </li>

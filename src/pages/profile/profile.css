@@ -1,0 +1,23 @@
+.container {
+    display: grid;
+    grid-template-columns: 151px 2fr;
+    grid-template-rows: 96px auto;
+    background-color: #F0F5FA;
+  }
+
+h2 {
+    margin-bottom: 30px;
+}
+
+.user-detail-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.user-details-form {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

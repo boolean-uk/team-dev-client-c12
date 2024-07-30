@@ -2,42 +2,69 @@ import { NavLink, useLocation } from 'react-router-dom'
 import CohortIcon from '../../assets/icons/cohortIcon'
 import HomeIcon from '../../assets/icons/homeIcon'
 import ProfileIcon from '../../assets/icons/profileIcon'
+import ExercisesIcon from '../../assets/icons/exercisesIcon'
+import LogsIcon from '../../assets/icons/logsIcon'
+import NotesIcon from '../../assets/icons/notesIcon'
 import useAuth from '../../hooks/useAuth'
+import useUser from '../../hooks/useUser'
 import './style.css'
 
 const Navigation = ({ disabledNav = false }) => {
     const { token } = useAuth()
+    const { currentUser } = useUser()    
     const location = useLocation()
 
-    if (!token) {
+    if (!token || !currentUser) {
         return null
     }
 
-    if (disabledNav) {
-        return (
-            <nav>
-            <ul>
-                <li>
-                    <NavLink to={location.pathname} end>
-                        <HomeIcon />
-                        <p>Home</p>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to={location.pathname} end>
-                        <ProfileIcon />
-                        <p>Profile</p>
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to={location.pathname} end>
-                        <CohortIcon />
-                        <p>Cohort</p>
-                    </NavLink>
-                </li>
-            </ul>
-        </nav>
-        )
+    const navIcons = () => {
+        const commonIcons = [
+            {
+                to: "/",
+                icon: <HomeIcon colour="#000046" />,
+                text: "Home"
+            },
+            {
+                to: "/",
+                icon: <ProfileIcon />,
+                text: "Profile"
+            },
+            {
+                to: "/",
+                icon: <CohortIcon />,
+                text: "Cohort"
+            },
+            {
+                to: '/',
+                icon: <ExercisesIcon />,
+                text: 'Exercises'
+            }
+        ]
+
+        const teacherIcons = [
+            ...commonIcons,
+            {
+                to: "/",
+                icon: <NotesIcon />,
+                text: "Notes"
+            },
+            {
+                to: "/",
+                icon: <LogsIcon />,
+                text: "Logs"
+            }
+        ]
+        const iconsToShow = currentUser.role === 'TEACHER' ? teacherIcons : commonIcons
+
+        return iconsToShow.map((icon, index) => (
+            <li key={index}>
+                <NavLink to={disabledNav ? location.pathname : icon.to} end={disabledNav}>
+                    {icon.icon}
+                    <p>{icon.text}</p>
+                </NavLink>
+            </li>
+        ))
     }
 
     return (
@@ -50,7 +77,7 @@ const Navigation = ({ disabledNav = false }) => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/">
+                    <NavLink to="/profile">
                         <ProfileIcon />
                         <p>Profile</p>
                     </NavLink>
@@ -61,6 +88,7 @@ const Navigation = ({ disabledNav = false }) => {
                         <p>Cohort</p>
                     </NavLink>
                 </li>
+                {navIcons()}
             </ul>
         </nav>
     )
