@@ -95,8 +95,6 @@ const AllSearchResults = () => {
   return (
     <>
       <div className='search-page-container'>
-        <Header className='search-page-header' />
-        <Navigation className="left-bar" />
         <main className='search-results-container'>
           <div className='search-content'>
             <div className='top'>

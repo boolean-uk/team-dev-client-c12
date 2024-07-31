@@ -41,8 +41,22 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              <Route path="/search-results" element={<AllSearchResults />} />
-              <Route path="/cohorts" element={<Cohorts />} />
+              <Route
+                path="search-results"
+                element={
+                  <ProtectedRoute>
+                    <AllSearchResults />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="cohorts"
+                element={
+                  <ProtectedRoute>
+                    <Cohorts />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="profile"
                 element={
