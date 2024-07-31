@@ -6,3 +6,20 @@
 .profile-circle-menu {
     margin-left: 65px;
 }
+
+.profile-icon-cohort {
+    justify-content: center;
+    padding-top: 1rem;
+    background-color: #64DC78;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+}
+
+.profile-icon-cohort svg {
+    margin-left: 7.5px;
+}
+
+.profile-icon-cohort path {
+    fill: white;
+}

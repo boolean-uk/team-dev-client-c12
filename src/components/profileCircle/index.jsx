@@ -43,7 +43,6 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
         style={{ cursor: cursor }}
       >
         {renderCascadingMenu()}
-
         <div className="profile-icon">
           <p>{uppercaseInitials}</p>
         </div>
@@ -52,7 +51,19 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
   )
 }
 
-const CascadingMenu = () => {
+ export const CohortProfileCircle = () => {
+  return (
+    <div>
+      <div className='profile-circle'>
+        <div className="profile-icon-cohort">
+          <SquareBracketsIcon />
+        </div>
+      </div>
+    </div>
+  )
+ }
+
+ const CascadingMenu = () => {
   return (
     <Menu className="profile-circle-menu">
       <MenuItem icon={<ProfileIcon />} text="Profile" linkTo="/profile"/>
