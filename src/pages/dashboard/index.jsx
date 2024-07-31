@@ -111,7 +111,7 @@ const Dashboard = () => {
       setIsTeacher(true);
     }
   }
-  console.log(students)
+  console.log(teachers)
 
   return (
     <>

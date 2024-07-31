@@ -66,6 +66,7 @@ const UserLists = ({ results, name }) => {
   const onClick = () => {
     navigate('/students', { state: { results: results } })
   }
+  console.log(results)
 
 
   return (
@@ -73,7 +74,7 @@ const UserLists = ({ results, name }) => {
       {results?.length === 0 && <p>No results found.</p>}
       {results?.length > 0 && (
         <ul className="search-results-list">
-          {results.map((user) => (
+          {results.slice(0, 10).map((user) => (
             <li key={user.id} className="found-user-card">
               <ProfileCircle
                 initials={getInitials(user.firstName, user.lastName)}
