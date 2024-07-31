@@ -42,8 +42,8 @@ const Cohorts = () => {
     return (
         <>
             <div className='cohorts-page-container' >
-                <Header className='cohorts-page-header' />
-                <Navigation className='cohorts-page-left-bar' />
+                {/* <Header className='cohorts-page-header' />
+                <Navigation className='cohorts-page-left-bar' /> */}
                 <main className='cohorts-container'>
                     <div className='cohorts-list-top'>
                         <h2>Cohorts</h2>

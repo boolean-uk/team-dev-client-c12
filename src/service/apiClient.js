@@ -51,7 +51,6 @@ const getCohorts = async () => {
   return res.data.cohorts
 }
 
-
 async function createPost(content) {
   return await post('posts', { content })
 }

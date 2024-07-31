@@ -46,16 +46,18 @@
 }
 
 .add-cohort-contents input,
+.add-cohort-contents option,
 .add-cohort-contents select {
     width: 100%;
     padding: 10px;
     border: 1px solid #dee2e6;
     border-radius: 5px;
     font-size: 1rem;
-    background: #f8f9fa;
+    background-color: #f8f9fa;
+    color: #000046;
 }
 
-.footnote p{
+.footnote p {
     font-size: small;
     color: #6c757d;
     margin-top: 10px;
@@ -69,13 +71,14 @@
     margin-top: 2rem;
 }
 
-.cancel-button Button{
+.cancel-button Button {
     background-color: #f0f5fa;
     width: 0.5rem;
     color: #6b6b92;
 }
 
-.next-button Button{
+.next-button Button {
     background-color: #000046;
     color: #fff;
 }
+

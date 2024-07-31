@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import useModal from "../../hooks/useModal";
 import Button from "../button";
 import { createCohort } from "../../service/apiClient";
+import AddStudentsToCohort from "./step2";
 import './style.css';
 
 const AddCohortMenu = ({closeMenu}) => {
@@ -11,6 +12,8 @@ const AddCohortMenu = ({closeMenu}) => {
     const [cohortName, setCohortName] = useState('')
     const [course, setCourse] = useState('')
     const [message, setMessage] = useState(null)
+    const [cohortData, setCohortData] = useState(null)
+    const [currentStep, setCurrentStep] = useState(1)
     const menuRef = useRef(null);
 
     const onEnterCohortName = (e) => {
@@ -30,22 +33,12 @@ const AddCohortMenu = ({closeMenu}) => {
     };
 
     const onSubmit = async () => {
-        const cohortData = { cohortName, course, startDate, endDate }
-        const res = await createCohort(cohortData)
-
         if (!cohortName || !course) {
             setMessage('Cohort name and Course must be provided in order to add a new cohort')
         }
-
-        if (res.status === 'success') {
-            setMessage(`Cohort ${cohortName} is being created`)
-            setTimeout(() => {
-                setMessage(null)
-                closeModal()
-            },2000)
-        } else {
-            setMessage('Failed to create new cohortData. Please try again')
-        }
+        const data = { cohortName, course, startDate, endDate }
+        setCohortData(data)
+        setCurrentStep(2)
     }
 
     return (
@@ -118,6 +111,7 @@ const AddCohortMenu = ({closeMenu}) => {
                     {message && <p>{message}</p>}
                 </div>
             </main>
+            {currentStep === 2 && <AddStudentsToCohort cohortData={cohortData} />}
         </>
     )    
 }
