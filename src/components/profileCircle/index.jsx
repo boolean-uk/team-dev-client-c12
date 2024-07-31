@@ -12,7 +12,7 @@ import './style.css'
 import useAuth from '../../hooks/useAuth'
 
 
-const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
+const ProfileCircle = ({ initials, hasCascadingMenu = true, authorId }) => {
   const { useClickOutside } = useAuth()
   const [isMenuVisible, setIsMenuVisible] = useState(false)
   const profileRef = useRef(null)
@@ -29,7 +29,7 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
 
   const renderCascadingMenu = () => {
     if (isMenuVisible && hasCascadingMenu) {
-      return <CascadingMenu />
+      return <CascadingMenu authorId={authorId}/>
     }
 
     return null
@@ -52,10 +52,10 @@ const ProfileCircle = ({ initials, hasCascadingMenu = true }) => {
   )
 }
 
-const CascadingMenu = () => {
+const CascadingMenu = ({authorId}) => {
   return (
     <Menu className="profile-circle-menu">
-      <MenuItem icon={<ProfileIcon />} text="Profile" linkTo="/profile"/>
+      <MenuItem icon={<ProfileIcon />} text="Profile" linkTo={`/profile/${authorId}`} />
 
       <MenuItem icon={<AddIcon />} text="Add note" />
 
