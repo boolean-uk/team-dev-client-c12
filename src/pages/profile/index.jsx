@@ -4,8 +4,9 @@ import UserProfileIcon from "../../components/UserProfileIcon";
 import TextInput from "../../components/form/textInput";
 import Form from "../../components/form";
 import "./profile.css";
-import useUser from "../../hooks/useUser";
+import { getUser } from "../../service/apiClient";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -19,25 +20,30 @@ const Profile = () => {
     bio: "",
   });
 
-  const { currentUser } = useUser();
+  const { id } = useParams();
 
   useEffect(() => {
-    setFormData(currentUser);
-  }, [currentUser]);
+    const fetchUser = async () => {
+      const response = await getUser(id);
+      const { user } = response.data;
+      setFormData(user);
+    };
+    fetchUser();
+  }, []);
 
   const handleSubmit = (e) => {};
 
   const handleChange = (e) => {};
 
   const labelMap = {
-    cohortId: 'Cohort ID',
-    role: 'Role',
-    email: 'Email',
-    firstName: 'First Name',
-    lastName: 'Last Name',
-    bio: 'Bio',
-    githubUsername: 'GitHub Username',
-  }
+    cohortId: "Cohort ID",
+    role: "Role",
+    email: "Email",
+    firstName: "First Name",
+    lastName: "Last Name",
+    bio: "Bio",
+    githubUsername: "GitHub Username",
+  };
 
   return (
     <main>
@@ -50,7 +56,11 @@ const Profile = () => {
         <Form className="user-details-form" onSubmit={handleSubmit}>
           {formData &&
             Object.keys(formData).map((input, index) => {
-              if (input === "id") {
+              console.log(formData.role);
+              if (
+                input === "id" ||
+                (input === "cohortId" && formData.role === "TEACHER")
+              ) {
                 return;
               }
               return (
@@ -64,7 +74,6 @@ const Profile = () => {
                 />
               );
             })}
-  
         </Form>
       </Card>
     </main>
