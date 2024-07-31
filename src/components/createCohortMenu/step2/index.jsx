@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link, NavLink } from 'react-router-dom';
 import { getUsers } from '../../../service/apiClient';
-import useUser from '../../../hooks/useUser';
 import Button from '../../button';
 import Card from '../../card';
 import ProfileCircle from '../../profileCircle';
+import CheckCohortToAdd from '../step3';
 import './style.css';
 
 const AddStudentsToCohort = ({ cohortData }) => {
     const location = useLocation();
-    const [currentStep, setCurrentStep] = useState(1)
+    const [currentStep, setCurrentStep] = useState(2)
     const [selectedStudents, setSelectedStudents] = useState([]);
     const [searchVal, setSearchVal] = useState('');
     const [results, setResults] = useState([]);
-    const { currentUser } = useUser();
-    
+    const [data, setData] = useState(null)
 
     useEffect(() => {
         getUsers()    
@@ -67,13 +66,16 @@ const AddStudentsToCohort = ({ cohortData }) => {
             ...cohortData,
             selectedStudents
         };
-    console.log('Data to pass to the next step:', dataToPass);
+        console.log(dataToPass);
+        setData(dataToPass)
+        setCurrentStep(3);
     };
 
     return (
         <div className="add-cohort-menu-container">
             <div className="add-cohort-contents">
                 <h3>Add cohort</h3>
+                <p>Add students to cohort</p>
                 <div>
                     <input
                         type="text"
@@ -132,6 +134,7 @@ const AddStudentsToCohort = ({ cohortData }) => {
                     </div>
                 </div>
             </div>
+            {currentStep === 3 && data && <CheckCohortToAdd cohortData={data} />}
         </div>
     );
 };

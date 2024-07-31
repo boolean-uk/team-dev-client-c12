@@ -1,12 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import useModal from "../../hooks/useModal";
 import Button from "../button";
-import { createCohort } from "../../service/apiClient";
 import AddStudentsToCohort from "./step2";
 import './style.css';
 
 const AddCohortMenu = ({closeMenu}) => {
-    const { closeModal } = useModal()
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [cohortName, setCohortName] = useState('')
@@ -14,7 +11,7 @@ const AddCohortMenu = ({closeMenu}) => {
     const [message, setMessage] = useState(null)
     const [cohortData, setCohortData] = useState(null)
     const [currentStep, setCurrentStep] = useState(1)
-    const menuRef = useRef(null);
+
 
     const onEnterCohortName = (e) => {
         setCohortName(e.target.value)
@@ -32,7 +29,7 @@ const AddCohortMenu = ({closeMenu}) => {
         setEndDate(e.target.value);
     };
 
-    const onSubmit = async () => {
+    const onClickNext = async () => {
         if (!cohortName || !course) {
             setMessage('Cohort name and Course must be provided in order to add a new cohort')
         }
@@ -105,7 +102,7 @@ const AddCohortMenu = ({closeMenu}) => {
                             <Button  text='Cancel' onClick={closeMenu}/>                            
                         </div>
                         <div className='next-button'>
-                            <Button text='Next' onClick={()=>onSubmit()}/>
+                            <Button text='Next' onClick={()=>onClickNext()}/>
                         </div>
                     </div>       
                     {message && <p>{message}</p>}
