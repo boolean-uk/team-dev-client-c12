@@ -36,6 +36,11 @@ async function createProfile(
   })
 }
 
+async function getCohorts() {
+  const res = await get('cohorts')
+  return res.data.cohorts
+}
+
 async function getUsers() {
   const res = await get('users')
   return res.data.users
@@ -83,4 +88,4 @@ async function request(method, endpoint, data, auth = true) {
   return response.json()
 }
 
-export { login, getUsers, getPosts, register, createProfile, getUser, createPost }
+export { login, getUsers, getPosts, register, createProfile, getUser, createPost, getCohorts }

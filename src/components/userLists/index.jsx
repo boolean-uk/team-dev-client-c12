@@ -81,7 +81,6 @@ const UserLists = ({ results, name }) => {
                 {name === 'searchResults' && currentUser.role === 'TEACHER'
                   ? renderTeacherContent(user)
                   : renderStudentContent(user)}
-                
             </li>
           ))}
         </ul>

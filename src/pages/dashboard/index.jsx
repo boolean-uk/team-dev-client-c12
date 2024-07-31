@@ -16,6 +16,7 @@ import ProfileIcon from "../../assets/icons/profileIcon";
 import UserProfileIcon from "../../components/UserProfileIcon";
 import UserLists from "../../components/userLists";
 import useUser from "../../hooks/useUser";
+import Cohorts from "../../components/cohorts";
 
 const Dashboard = () => {
   const [searchVal, setSearchVal] = useState("");
@@ -206,7 +207,7 @@ const Dashboard = () => {
           <>
             <Card name={"user-lists"}>
               <h4>Cohorts</h4>
-              <UserLists name={"cohorts"}/>
+              <Cohorts />
             </Card>
             <Card name={"user-lists"}>
               <h4>Students</h4>
