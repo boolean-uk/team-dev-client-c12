@@ -1,15 +1,17 @@
 import "./style.css";
 import ProfileCircle from "../profileCircle/index.jsx";
 import Card from "../card/index.jsx";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import SimpleThreeDotsMenu from "../simpleThreeDotsMenu/index.jsx";
 import useUser from "../../hooks/useUser.jsx";
 import ThreeDotsMenu from "../threeDotsMenu/index.jsx"
 import { useEffect, useRef } from "react";
+import Button from "../button/index.jsx";
 
 const UserLists = ({ results, name }) => {
   const { currentUser } = useUser()
   const menuRef = useRef(null);
+  const navigate = useNavigate()
 
     const getInitials = (firstName, lastName) => {
     const firstInitial = firstName ? firstName[0].toUpperCase() : "";
@@ -61,6 +63,10 @@ const UserLists = ({ results, name }) => {
     </>
   );
 
+  const onClick = () => {
+    navigate('/students', { state: { results: results } })
+  }
+
 
   return (
     <Card name={name}>
@@ -83,6 +89,15 @@ const UserLists = ({ results, name }) => {
                   : renderStudentContent(user)}
             </li>
           ))}
+          {results.length > 10 && (
+            <div>
+              <Button 
+                text={"All students"}
+                classes="green width-full"
+                onClick={onClick}
+              />
+            </div>
+          )}
         </ul>
       )}
     </Card>

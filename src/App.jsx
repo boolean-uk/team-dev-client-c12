@@ -11,6 +11,7 @@ import { ModalProvider } from "./context/modal";
 import { CurrentUserProvider } from "./context/currentUser";
 import Welcome from "./pages/welcome";
 import AllSearchResults from "./pages/allSearchResults";
+import Students from "./pages/students";
 
 const App = () => {
   return (
@@ -48,6 +49,7 @@ const App = () => {
                     <Profile />
                   </ProtectedRoute>
                 } />
+              <Route path="/students" element={<Students />}/>
             </Routes>
           </ModalProvider>
         </CurrentUserProvider>
