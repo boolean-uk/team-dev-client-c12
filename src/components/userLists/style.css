@@ -81,4 +81,6 @@
     padding-bottom: 12px;
 }
 
-
+.found-user-card {
+    max-width: 400px;
+}
