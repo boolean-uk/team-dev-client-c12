@@ -50,14 +50,17 @@ const UserLists = ({ results, name }) => {
 
   const renderStudentContent = (user) => (
     <>
-    <div className='found-user-profile-link'>
+    {name !== 'cohorts' || name !== 'students' && (
+      <div className='found-user-profile-link'>
       <NavLink to='/'><p>Profile</p></NavLink>
     </div>
+    )}
     <div className='search-three-dots-menu'>
       <SimpleThreeDotsMenu onClick={() => onClickMenu(user.id)} id={user.id} hasCascadingMenu={true}/>
     </div>
     </>
   );
+
 
   return (
     <Card name={name}>
@@ -78,6 +81,7 @@ const UserLists = ({ results, name }) => {
                 {name === 'searchResults' && currentUser.role === 'TEACHER'
                   ? renderTeacherContent(user)
                   : renderStudentContent(user)}
+                
             </li>
           ))}
         </ul>
