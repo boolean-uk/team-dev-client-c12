@@ -17,5 +17,9 @@
 }
 
 .profile-icon-cohort svg {
-    margin-left: 7px;
+    margin-left: 7.5px;
+}
+
+.profile-icon-cohort path {
+    fill: white;
 }

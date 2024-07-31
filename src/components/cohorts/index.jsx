@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import { getCohorts } from "../../service/apiClient"
 import Card from "../card"
-import CohortIcon from "../../assets/icons/cohortIcon"
-import SquareBracketsIcon from "../../assets/icons/squareBracketsIcon"
 import { CohortProfileCircle } from "../profileCircle"
 
 const Cohorts = () => {
