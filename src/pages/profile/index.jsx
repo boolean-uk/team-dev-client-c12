@@ -1,6 +1,6 @@
 import Card from "../../components/card";
 import UserDetails from "../../components/UserDetails";
-import UserProfileIcon from "../../components/UserProfileIcon";
+import ProfileCircle from "../../components/profileCircle";
 import TextInput from "../../components/form/textInput";
 import Form from "../../components/form";
 import "./profile.css";
@@ -21,6 +21,8 @@ const Profile = () => {
   });
 
   const { id } = useParams();
+  const stringToTitleCase = string => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,9 +33,13 @@ const Profile = () => {
     fetchUser();
   }, []);
 
+
   const handleSubmit = (e) => {};
 
   const handleChange = (e) => {};
+
+  let initials = [formData.firstName[0], formData.lastName[0]]
+  let name = formData.firstName + ' ' + formData.lastName
 
   const labelMap = {
     cohortId: "Cohort ID",
@@ -50,14 +56,16 @@ const Profile = () => {
       <h2>Profile</h2>
       <Card>
         <div className="user-detail-card">
-          <UserProfileIcon />
-          <UserDetails header={true} />
+        <ProfileCircle initials={initials}/>
+        <section>
+          <p className="profile-user-name">{name}</p>
+          <small>{stringToTitleCase(formData.role)}</small>
+        </section>
         </div>
         <Form className="user-details-form" onSubmit={handleSubmit}>
           {formData &&
             Object.keys(formData).map((input, index) => {
-              console.log(formData.role);
-              if (
+             if (
                 input === "id" ||
                 (input === "cohortId" && formData.role === "TEACHER")
               ) {
