@@ -58,7 +58,7 @@ const Profile = () => {
         <div className="user-detail-card">
         <ProfileCircle initials={initials}/>
         <section>
-          <p className="profile-user-name">{name}</p>
+          <p className="profile-user-name"><strong>{name}</strong></p>
           <small>{stringToTitleCase(formData.role)}</small>
         </section>
         </div>
