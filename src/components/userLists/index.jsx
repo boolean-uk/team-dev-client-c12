@@ -62,29 +62,16 @@ const UserLists = ({ results, name }) => {
     </div>
     </>
   );
-
+  
   const onClick = () => {
-    navigate('/students', { state: { results: results } })
+    const students = results
+    navigate('/students', { state: { results: students } })
   }
 
   const renderButton = () => {
-    if (
-      location.pathname !== "/students" ||
-      results.length > 10
-    ) {
-      <div className="button-container">
-        {console.log('true')}
-        <Button 
-          text={"All students"}
-          classes="green width-full"
-          onClick={onClick}
-        />
-      </div>
-    }
+     
   }
-  console.log(results)
 
-  console.log(location)
   return (
     <Card name={name}>
       {results?.length === 0 && <p>No results found.</p>}
@@ -106,7 +93,15 @@ const UserLists = ({ results, name }) => {
                   : renderStudentContent(user)}
             </li>
           ))}
-          {renderButton}
+          {results.length > 10 && location.pathname !== '/students' && (
+            <div className="button-container">
+              <Button 
+                text={"All students"}
+                classes="green width-full"
+                onClick={onClick}
+              />
+            </div>
+          )}
         </ul>
       )}
     </Card>
