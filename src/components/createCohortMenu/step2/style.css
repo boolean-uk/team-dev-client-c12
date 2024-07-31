@@ -1,0 +1,12 @@
+.found-user-card.selected {
+    background-color: #e6ebf5;
+    position: relative;
+}
+
+.checkmark {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: green;
+    font-size: 18px;
+}

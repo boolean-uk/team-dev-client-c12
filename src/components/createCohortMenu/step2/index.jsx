@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../../button';
+import { useLocation, Link, NavLink } from 'react-router-dom';
 import { getUsers } from '../../../service/apiClient';
+import useUser from '../../../hooks/useUser';
+import Button from '../../button';
+import Card from '../../card';
 import ProfileCircle from '../../profileCircle';
 import './style.css';
 
 const AddStudentsToCohort = ({ cohortData }) => {
-    const [students, setStudents] = useState([]);
+    const location = useLocation();
+    const [currentStep, setCurrentStep] = useState(1)
+    const [selectedStudents, setSelectedStudents] = useState([]);
     const [searchVal, setSearchVal] = useState('');
     const [results, setResults] = useState([]);
+    const { currentUser } = useUser();
+    
 
     useEffect(() => {
         getUsers()    
     }, []);
+
+    const onBackClick = () => {
+        if (currentStep > 1) {
+            setCurrentStep(currentStep-1)
+        }
+    }
 
     const onChange = async (e) => {
         const searchValue = e.target.value;
@@ -38,6 +51,25 @@ const AddStudentsToCohort = ({ cohortData }) => {
         return [firstInitial, secondInitial];
     };
 
+    const onSelectStudent = (user) => {
+        setSelectedStudents((prevSelectedStudents) => {
+            const isSelected = prevSelectedStudents.find(student => student.id === user.id);
+            if (isSelected) {
+                return prevSelectedStudents.filter(student => student.id !== user.id);
+            } else {
+                return [...prevSelectedStudents, user];
+            }
+        });
+    };
+
+    const onNextClick = () => {
+        const dataToPass = {
+            ...cohortData,
+            selectedStudents
+        };
+    console.log('Data to pass to the next step:', dataToPass);
+    };
+
     return (
         <div className="add-cohort-menu-container">
             <div className="add-cohort-contents">
@@ -59,12 +91,44 @@ const AddStudentsToCohort = ({ cohortData }) => {
                         ))}
                     </select>
                 </div>
+                <div className='search-results'>
+                    <Card className='search-results-card' name="results">
+                        {results.length === 0 && (
+                        <p>No results found.</p>
+                        )}
+                        {results.length > 0 && (
+                            <ul className='search-results-list'>
+                                {results.map((user) => {
+                                    const isSelected = selectedStudents.some(student => student.id === user.id);
+                                    const listItemClass = isSelected ? 'found-user-card selected' : 'found-user-card';
+                                    return (
+                                        <li
+                                            key={user.id}
+                                            className={listItemClass}
+                                            onClick={() => onSelectStudent(user)}
+                                        >
+                                            <ProfileCircle
+                                                initials={getInitials(user.firstName, user.lastName)}
+                                                hasCascadingMenu={false}
+                                            />
+                                            <div className='found-user-details'>
+                                                <span>{`${user.firstName} ${user.lastName}`}</span>
+                                                <p>{`Software Developer, Cohort ${user.cohortId}`}</p>
+                                            </div>
+                                            {isSelected && <span className='checkmark'>✔</span>}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        )}
+                    </Card>
+                </div>                  
                 <div className="buttons">
                     <div className='cancel-button'>
-                        <Button text='Back' onClick={() => setCurrentStep(1)} />
+                        <Button text='Back' onClick={onBackClick} />
                     </div>
                     <div className='next-button'>
-                        <Button text='Add students' onClick={() => console.log('Students added')} />
+                        <Button text='Add students' onClick={onNextClick} />
                     </div>
                 </div>
             </div>
