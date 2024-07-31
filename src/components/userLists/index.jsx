@@ -66,15 +66,31 @@ const UserLists = ({ results, name }) => {
   const onClick = () => {
     navigate('/students', { state: { results: results } })
   }
+
+  const renderButton = () => {
+    if (
+      location.pathname !== "/students" ||
+      results.length > 10
+    ) {
+      <div className="button-container">
+        {console.log('true')}
+        <Button 
+          text={"All students"}
+          classes="green width-full"
+          onClick={onClick}
+        />
+      </div>
+    }
+  }
   console.log(results)
 
-
+  console.log(location)
   return (
     <Card name={name}>
       {results?.length === 0 && <p>No results found.</p>}
       {results?.length > 0 && (
         <ul className="search-results-list">
-          {results.slice(0, 10).map((user) => (
+          {results.map((user) => (
             <li key={user.id} className="found-user-card">
               <ProfileCircle
                 initials={getInitials(user.firstName, user.lastName)}
@@ -90,15 +106,7 @@ const UserLists = ({ results, name }) => {
                   : renderStudentContent(user)}
             </li>
           ))}
-          {results.length > 10 && (
-            <div>
-              <Button 
-                text={"All students"}
-                classes="green width-full"
-                onClick={onClick}
-              />
-            </div>
-          )}
+          {renderButton}
         </ul>
       )}
     </Card>
