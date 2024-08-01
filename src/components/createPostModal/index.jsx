@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import useModal from '../../hooks/useModal'
 import './style.css'
-import Button from '../button'
 import UserProfileIcon from '../UserProfileIcon'
 import UserDetails from '../UserDetails'
 import PostModalActions from '../PostModalActions'
-import { createPost } from '../../service/apiClient'
+import { createPost , getPosts} from '../../service/apiClient'
 
-const CreatePostModal = () => {
+const CreatePostModal = ({setPosts}) => {
     const { closeModal } = useModal()
 
     const [message, setMessage] = useState(null)
@@ -21,12 +20,12 @@ const CreatePostModal = () => {
         const res = await createPost(content)
 
         if (res.status === "success") {
-            setMessage('Submit button was clicked! Closing modal in 2 seconds...')
-    
+            setMessage('Post created!')
             setTimeout(() => {
                 setMessage(null)
                 closeModal()
-            }, 2000)
+            }, 1000)
+            getPosts().then((res) => setPosts([...res]))
         }
     }
 
