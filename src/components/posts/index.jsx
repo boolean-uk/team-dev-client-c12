@@ -1,14 +1,11 @@
-import { useState, useEffect } from 'react'
 import Post from '../post'
 
-const Posts = ({posts}) => {
-    
-
+const Posts = ({ posts }) => {
     return (
         <>
             {posts.map((post) => {
                 const date = new Date(post.createdAt)
-                
+
                 return (
                     <Post
                         key={post.id}

@@ -29,10 +29,8 @@ const Dashboard = () => {
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const { currentUser } = useUser();
-  
   const [posts, setPosts] = useState([])
   
-
   useEffect(() => {
     getUsers().then(setCohorts);
     getTeachers();
