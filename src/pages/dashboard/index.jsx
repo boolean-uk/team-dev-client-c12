@@ -26,20 +26,19 @@ const Dashboard = () => {
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
   const [isTeacher, setIsTeacher] = useState(false);
-  const [posts, setPosts] = useState([]);
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const { currentUser } = useUser();
   
-  useEffect(() => {
-    getPosts().then(setPosts);
-  }, []);
+  const [posts, setPosts] = useState([])
+  
 
   useEffect(() => {
     getUsers().then(setCohorts);
     getTeachers();
     getStudents();
     verifyTeacher()
+    getPosts().then(setPosts)
   }, []);
 
   const onClickSearchBar = () => {

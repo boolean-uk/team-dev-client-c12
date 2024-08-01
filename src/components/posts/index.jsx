@@ -1,17 +1,19 @@
+import { useState, useEffect } from 'react'
 import Post from '../post'
 
-const Posts = ({ posts }) => {
-  const sortedPosts = posts.sort((a, b) => {
-    return b.id - a.id
-  }) 
-  return (
+const Posts = ({posts}) => {
+    
+
+    return (
         <>
-            {sortedPosts.map((post) => {
+            {posts.map((post) => {
+                const date = new Date(post.createdAt)
+                
                 return (
                     <Post
                         key={post.id}
                         name={`${post.author.firstName} ${post.author.lastName}`}
-                        date={post.createdAt}
+                        date={date.toLocaleString()}
                         content={post.content}
                         comments={post.comments}
                     />
