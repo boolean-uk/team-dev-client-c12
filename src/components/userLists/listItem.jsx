@@ -1,8 +1,8 @@
 import ProfileCircle from "../profileCircle";
 
-const ListItem = ({ user, getInitials, currentUser, renderTeacherContent, renderStudentContent }) => {
+const ListItem = ({ user, getInitials, currentUser, renderTeacherContent, renderStudentContent, name }) => {
   return (
-    <li key={user.id} className="found-user-card">
+    <li key={user.id} className='students-user-card'>
       <ProfileCircle
         initials={getInitials(user.firstName, user.lastName)}
         hasCascadingMenu={false}

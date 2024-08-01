@@ -24,3 +24,9 @@
   width: 800px;
   place-self: center;
 }
+
+.students-user-card {
+  display: grid;
+  grid-template-columns: 56px 1fr 40px;
+  width: 100%;
+}
