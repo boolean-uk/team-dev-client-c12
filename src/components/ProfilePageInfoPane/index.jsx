@@ -27,7 +27,7 @@ const ProfilePageInfoPane = ({ editMode, handleChange, handleSubmit, formData })
             <TextInput
               onChange={handleChange}
               className="profile-input"
-              key={index + formData.firstName}
+              key={index + 'profileUpdateForm'}
               name={input}
               label={labelMap[input]}
               value={formData[input]}
