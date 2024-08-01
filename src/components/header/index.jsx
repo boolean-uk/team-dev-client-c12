@@ -9,12 +9,15 @@ import { NavLink } from 'react-router-dom'
 import { useRef, useState } from 'react'
 import UserProfileIcon from '../UserProfileIcon'
 import UserDetails from '../UserDetails'
+import useUser from '../../hooks/useUser'
 
 const Header = () => {
     const { token, onLogout, useClickOutside } = useAuth()
     const [isMenuVisible, setIsMenuVisible] = useState(false)
     const profileIconRef = useRef(null)
 
+    const { currentUser } = useUser()
+    
     useClickOutside(profileIconRef, () => {
       setIsMenuVisible(false)
     })
@@ -41,7 +44,7 @@ const Header = () => {
                           <section className="user-panel-options border-top">
                               <ul>
                                   <li>
-                                      <NavLink to="/">
+                                      <NavLink to={`/profile/${currentUser?.id}`}>
                                           <ProfileIcon /> <p>Profile</p>
                                       </NavLink>
                                   </li>

@@ -31,7 +31,7 @@ const Profile = () => {
       setFormData(user);
     };
     fetchUser();
-  }, []);
+  }, [id]);
 
 
   const handleSubmit = (e) => {};
