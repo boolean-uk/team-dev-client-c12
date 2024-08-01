@@ -7,7 +7,7 @@ const Posts = () => {
   useEffect(() => {
     getPosts().then(setPosts);
   }, []);
-  
+
   return (
     <>
       {posts.map((post) => {
@@ -18,6 +18,7 @@ const Posts = () => {
             date={post.createdAt}
             content={post.content}
             comments={post.comments}
+            authorId={post.author.id}
           />
         );
       })}
