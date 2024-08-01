@@ -1,8 +1,7 @@
 .cohorts-page-container {
-    display: grid;
-    grid-template-rows: auto 1fr;
+    display: flex;
+    /* grid-template-rows: auto 1fr; */
     height: 100vh;
-    width: 75%;
     background-color: #f0f5fa;
 }
 
@@ -21,17 +20,66 @@
 } */
 
 .cohorts-list-top{
+    display: grid;
+    grid-template-rows: auto;
+    gap: 15px;
+    flex-direction: column;
     background-color: white;
-    margin-bottom: 1px;
     border: 1px #e6ebf5 solid;
     border-radius: 8px;
+    padding: 20px 20px 20px 20px;
+    h2{
+        margin-bottom: 0;
+    }
+    hr{
+        background-color: #f0f5fa;
+        height: 1px;
+    }
+    .all-cohorts{
+        margin: 0px -20px 0px -20px;
+    }
+    .add-cohort{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .add-cohort-icon{
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        background: #f0f5fa;
+        cursor: pointer;
+    }
 }
 
 .cohorts-list-top button {
-    margin-left: 0.5rem;;
     font-size: 1rem;
     padding-left: 15px;
     text-align: center;
     background-color: #f0f5fa;
 }
 
+.all-cohorts-list{
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.all-cohorts-list:hover{
+    background-color: #f0f0f0;
+}
+.all-cohorts-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+}
+.all-cohorts-container.collapsed{
+    width: 30%;
+}
+.student-card-container{
+    margin-top: 15px;
+    width: 70%;
+    padding: 15px;
+}
