@@ -21,3 +21,7 @@ h2 {
     flex-direction: column;
     gap: 5px;
 }
+
+.profile-user-name {
+    font-size: large;
+}

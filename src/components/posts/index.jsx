@@ -7,7 +7,6 @@ const Posts = ({ posts }) => {
   return (
         <>
             {sortedPosts.map((post) => {
-                console.log(post.createdAt)
                 return (
                     <Post
                         key={post.id}
