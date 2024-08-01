@@ -8,7 +8,6 @@ const Cohorts = () => {
     useEffect(() => {
         getCohorts().then(setCohorts)
     }, [])
-    console.log(cohorts)
 
     return (
         <Card name="cohorts">

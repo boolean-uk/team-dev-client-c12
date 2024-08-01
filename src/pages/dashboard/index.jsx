@@ -210,7 +210,7 @@ const Dashboard = () => {
             </Card>
             <Card name={"user-lists"}>
               <h4>Students</h4>
-              <UserLists results={cohorts} name={"students"}/>
+              <UserLists results={students} name={"students"}/>
             </Card>
             <Card name={"user-lists"}>
               <h4>Teachers</h4>

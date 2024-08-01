@@ -11,8 +11,6 @@ const Students = () => {
     const [students, setStudents] = useState(studentsState)
     return (
         <div className="students-page-container">
-            <Header className='students-header'/>
-            <Navigation className="left-bar" />
             <main className="students-main">
                 <div className="top">
                     <h2>Students</h2>

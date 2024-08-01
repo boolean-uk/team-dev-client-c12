@@ -38,6 +38,9 @@ async function createProfile(
 
 async function getCohorts() {
   const res = await get('cohorts')
+  if(res.data.error) {
+    return res
+  }
   return res.data.cohorts
 }
 

@@ -1,7 +1,6 @@
 import "./style.css";
-import ProfileCircle from "../profileCircle/index.jsx";
 import Card from "../card/index.jsx";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import SimpleThreeDotsMenu from "../simpleThreeDotsMenu/index.jsx";
 import useUser from "../../hooks/useUser.jsx";
 import ThreeDotsMenu from "../threeDotsMenu/index.jsx";

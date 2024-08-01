@@ -49,7 +49,11 @@ const App = () => {
                     <Profile />
                   </ProtectedRoute>
                 } />
-              <Route path="/students" element={<Students />}/>
+              <Route path="/students" element={
+                <ProtectedRoute>
+                  <Students />
+                </ProtectedRoute>
+                }/>
             </Routes>
           </ModalProvider>
         </CurrentUserProvider>
