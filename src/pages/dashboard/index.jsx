@@ -7,7 +7,7 @@ import CreatePostModal from "../../components/createPostModal";
 import Posts from "../../components/posts";
 import useModal from "../../hooks/useModal";
 import "./style.css";
-import { getUsers } from "../../service/apiClient";
+import { getUsers , getPosts} from "../../service/apiClient";
 import ProfileCircle from "../../components/profileCircle";
 import EllipsisIcon from "../../assets/icons/ellipsisIcon";
 import Menu from "../../components/menu";
@@ -26,9 +26,14 @@ const Dashboard = () => {
   const [teachers, setTeachers] = useState([]);
   const [students, setStudents] = useState([]);
   const [isTeacher, setIsTeacher] = useState(false);
+  const [posts, setPosts] = useState([]);
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const { currentUser } = useUser();
+  
+  useEffect(() => {
+    getPosts().then(setPosts);
+  }, []);
 
   useEffect(() => {
     getUsers().then(setCohorts);
@@ -80,7 +85,7 @@ const Dashboard = () => {
   const { openModal, setModal } = useModal();
 
   const showModal = () => {
-    setModal("Create a post", <CreatePostModal />);
+    setModal("Create a post", <CreatePostModal setPosts = {setPosts}/>);
     openModal();
   };
 
@@ -121,7 +126,7 @@ const Dashboard = () => {
           </div>
         </Card>
 
-        <Posts />
+        <Posts posts={posts}/>
       </main>
 
       <aside className="dash-aside">
