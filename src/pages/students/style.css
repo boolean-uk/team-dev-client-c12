@@ -19,3 +19,8 @@
   height: 100vh;
   background-color: #f0f5fa;
 }
+
+.students-main {
+  width: 800px;
+  place-self: center;
+}
