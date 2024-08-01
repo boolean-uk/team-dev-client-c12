@@ -42,6 +42,7 @@ const CheckCohortToAdd = ({ cohortData }) => {
         }
     };
 
+    const newCohort = cohortData
     const studentsInCohort = cohortData.selectedStudents
     
     const getInitials = (firstName, lastName) => {
@@ -91,32 +92,32 @@ const CheckCohortToAdd = ({ cohortData }) => {
                         ))}
                     </select>
                 </div>
-                <div className='search-results'>
-                    <Card className='search-results-card' name="results">
-                        {results.length === 0 && (
-                        <p>No results found.</p>
+                <div className='students-in-cohort'>
+                    <Card className='students-in-cohort-card' name="results">
+                        {studentsInCohort.length === 0 && (
+                        <p>{`There are no students in cohort ${newCohort.name}`}</p>
                         )}
-                        {results.length > 0 && (
-                            <ul className='search-results-list'>
-                                {results.map((user) => {
-                                    const isSelected = selectedStudents.some(student => student.id === user.id);
-                                    const listItemClass = isSelected ? 'found-user-card selected' : 'found-user-card';
-                                    return (
-                                        <li
-                                            key={user.id}
-                                            className={listItemClass}
-                                            onClick={() => onSelectStudent(user)}
-                                        >
-                                            <ProfileCircle
-                                                initials={getInitials(user.firstName, user.lastName)}
-                                                hasCascadingMenu={false}
-                                            />
-                                            <div className='found-user-details'>
-                                                <span>{`${user.firstName} ${user.lastName}`}</span>
-                                                <p>{`Software Developer, Cohort ${user.cohortId}`}</p>
-                                            </div>
-                                            {isSelected && <span className='checkmark'>✔</span>}
-                                        </li>
+                        {studentsInCohort.length > 0 && (
+                            <ul className='students-in-cohort-list'>
+                                {studentsInCohort.map((student) => {
+                                const isSelected = selectedStudents.some(student => student.id === student.id);
+                                const listItemClass = isSelected ? 'student-in-cohort-card selected' : 'student-in-cohort-card';
+                                return (
+                                    <li
+                                        key={student.id}
+                                        className={listItemClass}
+                                        onClick={() => onSelectStudent(student)}
+                                    >
+                                        <ProfileCircle
+                                            initials={getInitials(student.firstName, student.lastName)}
+                                            hasCascadingMenu={false}
+                                        />
+                                        <div className='found-student-details'>
+                                            <span>{`${student.firstName} ${student.lastName}`}</span>
+                                            <p>{`Software Developer, Cohort ${student.cohortId}`}</p>
+                                        </div>
+                                        {isSelected && <span className='checkmark'>✔</span>}
+                                    </li>
                                     );
                                 })}
                             </ul>

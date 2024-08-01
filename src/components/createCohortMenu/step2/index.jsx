@@ -7,7 +7,7 @@ import ProfileCircle from '../../profileCircle';
 import CheckCohortToAdd from '../step3';
 import './style.css';
 
-const AddStudentsToCohort = ({ cohortData }) => {
+const AddStudentsToCohort = ({closeMenu, cohortData }) => {
     const location = useLocation();
     const [currentStep, setCurrentStep] = useState(2)
     const [selectedStudents, setSelectedStudents] = useState([]);

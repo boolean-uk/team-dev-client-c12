@@ -1,4 +1,4 @@
-.add-cohort-menu-container {
+/* .add-cohort-menu-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,4 +80,17 @@
 .next-button Button {
     background-color: #000046;
     color: #fff;
+} */
+
+.student-in-cohort-card.selected {
+    background-color: #e6ebf5;
+    position: relative;
+}
+
+.checkmark {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: green;
+    font-size: 18px;
 }
