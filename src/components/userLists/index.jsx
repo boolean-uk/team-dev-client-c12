@@ -43,6 +43,7 @@ const UserLists = ({ results, name }) => {
 
   const renderTeacherContent = (user) => (
     <>
+      
       <div className="teacher-links">
         <NavLink to="/">
           <span>Profile</span>
