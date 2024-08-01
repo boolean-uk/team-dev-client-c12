@@ -14,7 +14,7 @@ const CheckCohortToAdd = ({ cohortData }) => {
     const [results, setResults] = useState([]);
 
     useEffect(() => {
-        getUsers()    
+        getUsers() 
     }, []);
 
     const onBackClick = () => {
@@ -41,6 +41,8 @@ const CheckCohortToAdd = ({ cohortData }) => {
             console.error('Error fetching users:', error);
         }
     };
+
+    const studentsInCohort = cohortData.selectedStudents
     
     const getInitials = (firstName, lastName) => {
         const firstInitial = firstName ? firstName.charAt(0).toUpperCase() : '';

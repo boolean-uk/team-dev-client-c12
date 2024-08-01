@@ -66,7 +66,6 @@ const AddStudentsToCohort = ({ cohortData }) => {
             ...cohortData,
             selectedStudents
         };
-        console.log(dataToPass);
         setData(dataToPass)
         setCurrentStep(3);
     };
