@@ -1,5 +1,5 @@
 import Card from "../../components/card";
-import UserDetails from "../../components/UserDetails";
+import ProfilePageInfoPane from "../../components/ProfilePageInfoPane";
 import ProfileCircle from "../../components/profileCircle";
 import TextInput from "../../components/form/textInput";
 import Form from "../../components/form";
@@ -7,6 +7,7 @@ import "./profile.css";
 import { getUser } from "../../service/apiClient";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import useUser from "../../hooks/useUser";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -19,20 +20,24 @@ const Profile = () => {
     email: "",
     bio: "",
   });
+  const [editMode, setEditMode] = useState(false)
 
   const { id } = useParams();
+  const { currentUser } = useUser()
+  
   const stringToTitleCase = string => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-
 
   useEffect(() => {
     const fetchUser = async () => {
       const response = await getUser(id);
       const { user } = response.data;
       setFormData(user);
+      if(currentUser?.id === Number(id) || currentUser?.role === 'TEACHER') {
+        setEditMode(true)
+      }
     };
     fetchUser();
-  }, [id]);
-
+  }, [id, currentUser]);
 
   const handleSubmit = (e) => {};
 
@@ -62,27 +67,7 @@ const Profile = () => {
           <small>{stringToTitleCase(formData.role)}</small>
         </section>
         </div>
-        <Form className="user-details-form" onSubmit={handleSubmit}>
-          {formData &&
-            Object.keys(formData).map((input, index) => {
-             if (
-                input === "id" ||
-                (input === "cohortId" && formData.role === "TEACHER")
-              ) {
-                return;
-              }
-              return (
-                <TextInput
-                  onChange={handleChange}
-                  className="profile-input"
-                  key={index}
-                  name={input}
-                  label={labelMap[input]}
-                  value={formData[input]}
-                />
-              );
-            })}
-        </Form>
+        <ProfilePageInfoPane handleChange={handleChange} handleSubmit={handleSubmit} editMode={editMode} formData={formData}/>
       </Card>
     </main>
   );
