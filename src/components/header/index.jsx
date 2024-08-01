@@ -44,7 +44,7 @@ const Header = () => {
                           <section className="user-panel-options border-top">
                               <ul>
                                   <li>
-                                      <NavLink to={`/profile/${currentUser?.id}`}>
+                                      <NavLink to={`/profile/${currentUser?.id}`} onClick={() => setIsMenuVisible(!isMenuVisible)}>
                                           <ProfileIcon /> <p>Profile</p>
                                       </NavLink>
                                   </li>
