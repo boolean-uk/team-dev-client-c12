@@ -42,7 +42,7 @@ const App = () => {
               />
               <Route path="/search-results" element={<AllSearchResults />} />
               <Route
-                path="profile"
+                path="profile/:id"
                 element={
                   <ProtectedRoute>
                     <Profile />

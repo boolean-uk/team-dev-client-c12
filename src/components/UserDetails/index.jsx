@@ -1,6 +1,8 @@
 import useUser from '../../hooks/useUser'
 
 export default function UserDetails({ header = false }) {
+    const stringToTitleCase = string => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    
     const { currentUser } = useUser()
 
     if (!currentUser || !currentUser?.firstName) {
@@ -11,8 +13,7 @@ export default function UserDetails({ header = false }) {
 
     const userFullName = `${currentUser?.firstName} ${currentUser?.lastName}`
     
-    const stringToTitleCase = string => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-
+    
     if (header) {        
         return (
             <div className="post-user-name">
