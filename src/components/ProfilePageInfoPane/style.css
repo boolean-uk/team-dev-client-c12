@@ -1,8 +1,11 @@
-
 .info-label {
   font-weight: bold;
 }
 
 li {
     margin-bottom: 10px;
+}
+
+.submit-button {
+    place-self: center;
 }

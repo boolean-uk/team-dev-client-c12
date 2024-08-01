@@ -1,5 +1,6 @@
 import TextInput from "../../components/form/textInput";
 import Form from "../../components/form";
+import Button from "../button";
 import "./style.css";
 
 const ProfilePageInfoPane = ({ editMode, handleChange, handleSubmit, formData }) => {
@@ -33,8 +34,12 @@ const ProfilePageInfoPane = ({ editMode, handleChange, handleSubmit, formData })
             />
           );
         })}
+
+        <Button classes="submit-button" text="Update" type="submit"/>
     </Form>)
   }
+
+
  return (<ul className="uneditable-user-data">
       {Object.keys(formData).map((input, index) => {
          if (
