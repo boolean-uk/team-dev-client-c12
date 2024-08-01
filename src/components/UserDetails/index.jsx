@@ -2,17 +2,12 @@ import useUser from '../../hooks/useUser'
 
 export default function UserDetails({ header = false }) {
     const stringToTitleCase = string => string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-
-    
     
     const { currentUser } = useUser()
-   
-   
 
     if (!currentUser || !currentUser?.firstName) {
         return <div className="post-user-name"></div>
     }
-
 
     const userCohort = currentUser?.cohortId ? `, Cohort ${currentUser.cohortId}` : ''
 
